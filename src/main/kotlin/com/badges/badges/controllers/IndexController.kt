@@ -1,3 +1,5 @@
+package com.badges.badges.controllers
+
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,7 +15,7 @@ class IndexController {
 
     @RequestMapping("/perfil", method = [RequestMethod.GET])
     fun perfil(model : ModelMap ) : String{
-        model.put("titulo", "A minha primeira pagina");
+        // model.put("titulo", "A minha primeira pagina");
         return "perfil";
     }
 }
