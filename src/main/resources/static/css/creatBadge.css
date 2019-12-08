@@ -1,0 +1,14 @@
+/* creatBadge.css */
+.navbar-light {
+    background-color: darkorange;
+}
+
+span{
+    text-align: center;
+}
+
+img{
+    width: 220px;
+    left: 15px;
+}
+

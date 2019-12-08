@@ -1,4 +1,4 @@
-package com.badges.badges
+package pt.ulusofona.badges
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

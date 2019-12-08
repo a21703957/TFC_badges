@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Badge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel = "stylesheet" type = "text/css" href = "/css/creatBadge.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar fixed-top navbar-light ">
+        <a class="navbar-brand" href="#">
+            <img src="/img/logo.png" height="80" alt="mdb logo">
+        </a>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!--/*@thymesVar id="badge" type="pt.ulusofona.badges.Badge"*/-->
+    <form method="post" th:action="@{/badgeform}" th:object="${badge}">
+        <p>
+            Nome : <input type="text" th:field="*{name}">
+        </p>
+        <p>
+            Descriçao : <input type = "text" th:field="*{description}">
+        </p>
+        <p>
+            <input type="submit" value="Submit"/> <input type="reset" value="Reset">
+        </p>
+
+    </form>
+
+</body>
+</html>
