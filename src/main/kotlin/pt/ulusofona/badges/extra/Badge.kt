@@ -1,4 +1,4 @@
-package pt.ulusofona.badges
+package pt.ulusofona.badges.extra
 
 import javax.validation.constraints.NotEmpty
 

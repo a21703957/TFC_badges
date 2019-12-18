@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Create Badge</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel = "stylesheet" type = "text/css" href = "/css/creatBadge.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head th:replace="layouts/layout :: head (title = 'Criar Badge')">
+
 </head>
 <body>
+    <div th:replace="layouts/layout :: menu"> </div>
 
-    <nav class="navbar fixed-top navbar-light ">
-        <a class="navbar-brand" href="#">
-            <img src="/img/logo.png" height="80" alt="mdb logo">
-        </a>
-    </nav>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div>
+        <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
 
-    <!--/*@thymesVar id="badge" type="pt.ulusofona.badges.Badge"*/-->
-    <form method="post" th:action="@{/badgeform}" th:object="${badge}">
-        <p>
-            Nome : <input type="text" th:field="*{name}">
-        </p>
-        <p>
-            Descriçao : <input type = "text" th:field="*{description}">
-        </p>
-        <p>
-            <input type="submit" value="Submit"/> <input type="reset" value="Reset">
-        </p>
+        <form method="post" th:action="@{/badgeform}" th:object="${badgeForm}" class ="form-horizontal was-validated">
+            <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
+                <br>
+                <label for="name" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-9">
+                    <input th:field="*{name}" type="text" class="form-control" id="name" />
+                    <p class="help-block invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
+                </div>
+            </div>
+            <div class="form-group " th:classappend="${#fields.hasErrors('description')} ? 'has-error' : ''">
+                <label for="description" class="col-sm-3 control-label">Descrição</label>
+                <div class="col-sm-9">
+                    <input th:field="*{description}" type="text" class="form-control" id="description" />
+                    <p class="help-block" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submeter</button> <button type="reset" class="btn btn-primary">Repor</button>
+            </div>
 
-    </form>
+
+        </form>
+    </div>
+
 
 </body>
 </html>

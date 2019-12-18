@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head (title)">
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="title" type=""*/-->
+    <title th:text="${title}"></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class = "navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar bg-light" th:fragment="menu">
+      <a class ="navbar-brand " href="/" aria-label="Bootstrap">Strength your Skills</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+              </li>
+
+          </ul>
+          <div class="btn-group">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Perfil
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                  <button class="dropdown-item" type="button">Badges</button>
+                  <button class="dropdown-item" type="button">Configurações</button>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Sair</a>
+              </div>
+          </div>
+
+      </div>
+  </nav>
+
+</body>
+</html>
