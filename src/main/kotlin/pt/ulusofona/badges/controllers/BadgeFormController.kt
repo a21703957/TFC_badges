@@ -28,15 +28,9 @@ class BadgeFormController{
         return "badgecreated"
     }
 
+    @GetMapping("/listofstudents")
+    fun listStudentes():String{
+        return "listofstudents"
+    }
 
-
-
-
-
-    //Badge form with error
-   /* @RequestMapping("/badgeform", method = [RequestMethod.GET])
-    fun formError(model : Model): String {
-        model.addAttribute("formError", true);
-        return "badgeform.html";
-    }*/
 }

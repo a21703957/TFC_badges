@@ -14,5 +14,8 @@ data class Badge (
         var name : String? = null,
 
         @Column(nullable = false)
-        var description : String? = null
+        var description : String? = null/*,
+
+        var validacao : String? = null,
+        var toWin : String? = null*/
 )

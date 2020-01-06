@@ -6,33 +6,87 @@
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
 
-    <div>
-        <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-
-        <form method="post" th:action="@{/badgeform}" th:object="${badgeForm}" class ="form-horizontal was-validated">
+    <div class="container">
+<!--        &lt;!&ndash;/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/&ndash;&gt;-->
+        <br>
+        <form method="post" th:action="@{/badgeform}" th:object="${badgeForm}" class ="needs-validation" novalidate>
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
                 <br>
                 <label for="name" class="col-sm-3 control-label">Name</label>
                 <div class="col-sm-9">
-                    <input th:field="*{name}" type="text" class="form-control" id="name" />
-                    <p class="help-block invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
+                    <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Nome do Badge" required=""/>
+                    <div class = "valid-feedback"></div>
+                    <div class = "invalid-feedback">Por favor, Insira o Nome para o Badge</div>
+                    <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
                 </div>
             </div>
             <div class="form-group " th:classappend="${#fields.hasErrors('description')} ? 'has-error' : ''">
                 <label for="description" class="col-sm-3 control-label">Descrição</label>
                 <div class="col-sm-9">
-                    <input th:field="*{description}" type="text" class="form-control" id="description" />
+                    <input th:field="*{description}" type="text" class="form-control" id="description" placeholder="Descrição do Badge" required=""/>
+                    <div class = "valid-feedback"></div>
+                    <div class="invalid-feedback">Por favor, Insira a Descrição para o Badge</div>
                     <p class="help-block" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</p>
                 </div>
             </div>
+            <!--<div class="form-group " th:classappend="${#fields.hasErrors('toWin')} ? 'has-error' : ''">
+                <label for="toWin" class="col-sm-3 control-label">Como Ganhar</label>
+                <div class="col-sm-9">
+                    <input th:field="*{toWin}" type="text" class="form-control" id="toWin" placeholder="Como Ganhar o Badge" required=""/>
+                    <div class = "valid-feedback"></div>
+                    <div class="invalid-feedback">Por favor, Indique como ganhar o Badge</div>
+                    <p class="help-block" th:if="${#fields.hasErrors('toWin')}" th:errors="*{toWin}">Error</p>
+                </div>
+
+            </div>-->
+            <!--<div class="form-select-button">
+                <label class="col-sm-3 control-box">Tipo de Validação:</label>
+                <div class="col-sm-9">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="remember" required>Na Plataforma
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="remember" required>Externo à Plataform
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback"></div>
+                        </label>
+                    </div>
+                </div>
+
+            </div>-->
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Submeter</button> <button type="reset" class="btn btn-primary">Repor</button>
             </div>
 
 
         </form>
+        <script>
+            // Disable form submissions if there are invalid fields
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Get the forms we want to add validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
     </div>
-
-
 </body>
 </html>
