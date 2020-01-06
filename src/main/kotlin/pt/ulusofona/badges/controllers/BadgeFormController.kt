@@ -6,10 +6,13 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import pt.ulusofona.badges.extra.Badge
 import pt.ulusofona.badges.forms.BadgeForm
+import pt.ulusofona.badges.repositories.BadgeRepository
 import javax.validation.Valid
 
 @Controller
-class BadgeFormController{
+class BadgeFormController(
+        val badgeRepository: BadgeRepository
+) {
 
     //Mostra o formulário
     @GetMapping("/badgeform")
@@ -25,6 +28,12 @@ class BadgeFormController{
         if(bindingResult.hasErrors()){
             return "badgeForm"
         }
+
+        val badgeDao = pt.ulusofona.badges.dao.Badge(
+                name = badgeForm.name,
+                description = badgeForm.description)
+        badgeRepository.save(badgeDao)
+
         return "badgecreated"
     }
 

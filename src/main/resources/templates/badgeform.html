@@ -29,7 +29,7 @@
                     <p class="help-block" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</p>
                 </div>
             </div>
-            <!--<div class="form-group " th:classappend="${#fields.hasErrors('toWin')} ? 'has-error' : ''">
+            <div class="form-group " th:classappend="${#fields.hasErrors('toWin')} ? 'has-error' : ''">
                 <label for="toWin" class="col-sm-3 control-label">Como Ganhar</label>
                 <div class="col-sm-9">
                     <input th:field="*{toWin}" type="text" class="form-control" id="toWin" placeholder="Como Ganhar o Badge" required=""/>
@@ -38,8 +38,9 @@
                     <p class="help-block" th:if="${#fields.hasErrors('toWin')}" th:errors="*{toWin}">Error</p>
                 </div>
 
-            </div>-->
-            <!--<div class="form-select-button">
+            </div>
+            <!--
+            <div class="form-select-button">
                 <label class="col-sm-3 control-box">Tipo de Validação:</label>
                 <div class="col-sm-9">
                     <div class="form-group form-check">
@@ -60,7 +61,8 @@
                     </div>
                 </div>
 
-            </div>-->
+            </div>
+            -->
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Submeter</button> <button type="reset" class="btn btn-primary">Repor</button>
             </div>
