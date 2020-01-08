@@ -31,7 +31,9 @@ class BadgeFormController(
 
         val badgeDao = pt.ulusofona.badges.dao.Badge(
                 name = badgeForm.name,
-                description = badgeForm.description)
+                description = badgeForm.description,
+                toWin = badgeForm.toWin)
+
         badgeRepository.save(badgeDao)
 
         return "badgecreated"
@@ -41,5 +43,7 @@ class BadgeFormController(
     fun listStudentes():String{
         return "listofstudents"
     }
+
+
 
 }
