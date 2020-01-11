@@ -1,9 +1,6 @@
 package pt.ulusofona.badges.dao
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 enum class Validacao {
         Externa, Interna
@@ -24,10 +21,12 @@ data class Badge (
         var toWin : String? = null,
 
         @Column(nullable = false)
-        var validacao: Validacao = Validacao.Externa
+        var validacao: Validacao = Validacao.Externa){
+
+        @ManyToOne
+        lateinit var teacher: Teacher
+}
 
 
 
-        /*var validacao : String? = null,
-        var toWin : String? = null*/
-)
+

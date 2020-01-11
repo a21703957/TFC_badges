@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head (title = 'Home Professor')">
+
 </head>
+
 <body>
+    <div th:replace="layouts/layout :: menu"> </div>
+    <div>
+        <img src="./img/badge1.png" class="rounded float-left" alt="polyglota" width="304" height="304">
+
+    </div>
+
 
 </body>
 </html>

@@ -8,13 +8,16 @@
     <br>
     <h1>Resultado</h1>
     <br>
+    <div >
+        <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+        <p th:text=" 'Nome: ' + ${badgeForm.name}"></p>
+        <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+        <p th:text=" 'Descrição: ' + ${badgeForm.description}"></p>
+        <p th:text=" 'Como Ganhar: ' + ${badgeForm.toWin}"></p>
+        <a href="/badgeform">Adicionar novo Badge</a>
+    </div>
 
-    <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-    <p th:text=" 'Nome: ' + ${badgeForm.name}"></p>
-    <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-    <p th:text=" 'Descrição: ' + ${badgeForm.description}"></p>
-       <p th:text=" 'Como Ganhar: ' + ${badgeForm.toWin}"></p>
-    <a href="/badgeform">Adicionar novo Badge</a>
+<!--    <img src="./img/logo.png">-->
 
 
 </body>
