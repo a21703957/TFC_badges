@@ -6,22 +6,28 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import pt.ulusofona.badges.forms.BadgeForm
 import pt.ulusofona.badges.repositories.BadgeRepository
+import java.security.Principal
 import javax.validation.Valid
 
 @Controller
+@RequestMapping("/teacher")
 class TeacherController(
         val badgeRepository: BadgeRepository
 ) {
-    @GetMapping("/teacherHome")
+    @GetMapping("/")
     fun index() : String{
         return "teacherHome";
     }
     //Mostra o formulário
     @GetMapping("/badgeform")
-    fun sendForm(model : ModelMap):String{
+    fun sendForm(model : ModelMap, principal: Principal):String{
         model["badgeForm"] = BadgeForm()
+
+        println("user em sessão: ${principal.name}")
+
         return "badgeform"
     }
 
