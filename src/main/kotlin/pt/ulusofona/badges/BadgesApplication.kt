@@ -8,4 +8,5 @@ class BadgesApplication
 
 fun main(args: Array<String>) {
 	runApplication<BadgesApplication>(*args)
+
 }
