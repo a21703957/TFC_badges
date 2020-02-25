@@ -10,9 +10,16 @@
 <!--        &lt;!&ndash;/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/&ndash;&gt;-->
         <br>
         <h1 th:text="${username}"></h1>
-        <form method="post" th:action="@{/badgeform}" th:object="${badgeForm}" class ="needs-validation" novalidate>
+        <form method="post" th:action="@{/teacher/badgeform}" th:object="${badgeForm}" class ="needs-validation" novalidate>
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
                 <br>
+
+                <div class="col-sm-9">
+                    <label for="teacherName" class="col-sm-3 control-label">Teacher:</label>
+                    <input th:field="*{teacherName}" type="text" class="form-control" id="teacherName" placeholder="Teacher" required=""/>
+                    <div class = "valid-feedback"></div>
+                    <div class="invalid-feedback">Por favor, Insira a Descrição para o Badge</div>
+                                    </div>
                 <label for="name" class="col-sm-3 control-label">Nome:</label>
                 <div class="col-sm-9">
                     <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Nome do Badge" required=""/>

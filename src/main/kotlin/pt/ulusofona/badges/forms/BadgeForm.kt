@@ -1,5 +1,6 @@
 package pt.ulusofona.badges.forms
 
+import pt.ulusofona.badges.dao.Teacher
 import pt.ulusofona.badges.dao.Validacao
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
@@ -14,7 +15,8 @@ data class BadgeForm (
         @field:NotEmpty(message="Campo Obrigatório")
         var toWin : String?= null,
         @field:NotNull(message = "Error: Language must not be empty")
-        var validacao: Validacao? = null
+        var validacao: Validacao? = null,
+        var teacherName : String? = null
 
 )
 

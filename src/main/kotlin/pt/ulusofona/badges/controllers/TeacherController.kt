@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import pt.ulusofona.badges.forms.BadgeForm
 import pt.ulusofona.badges.repositories.BadgeRepository
+import pt.ulusofona.badges.repositories.TeacherRepository
 import java.security.Principal
 import javax.validation.Valid
 
 @Controller
 @RequestMapping("/teacher")
 class TeacherController(
-        val badgeRepository: BadgeRepository
+        val badgeRepository: BadgeRepository,
+        val teacherRepository: TeacherRepository
 ) {
     @GetMapping("/")
     fun index() : String{
@@ -45,6 +47,11 @@ class TeacherController(
                 toWin = badgeForm.toWin,
                 validacao = badgeForm.validacao!!)
 
+        val teacher = pt.ulusofona.badges.dao.Teacher(
+               name = badgeForm.teacherName
+        )
+        teacherRepository.save(teacher)
+        badgeDao.teacher = teacher
         badgeRepository.save(badgeDao)
 
         return "badgecreated"
