@@ -35,22 +35,26 @@ class TeacherController(
 
     @PostMapping("/badgeform")
     fun processForm(@Valid @ModelAttribute("badgeForm")badgeForm: BadgeForm,
-                    bindingResult: BindingResult) : String{
+                    bindingResult: BindingResult, principal:Principal) : String{
 
         if(bindingResult.hasErrors()){
             return "badgeForm"
         }
+        println("user em sessão: ${principal.name}")
 
         val badgeDao = pt.ulusofona.badges.dao.Badge(
                 name = badgeForm.name,
                 description = badgeForm.description,
                 toWin = badgeForm.toWin,
                 validacao = badgeForm.validacao!!)
+        var teacher = teacherRepository.findByName(principal.name)
+        if(teacher==null) {
+            teacher = pt.ulusofona.badges.dao.Teacher(
+                    name = principal.name
+            )
+            teacherRepository.save(teacher)
+        }
 
-        val teacher = pt.ulusofona.badges.dao.Teacher(
-               name = badgeForm.teacherName
-        )
-        teacherRepository.save(teacher)
         badgeDao.teacher = teacher
         badgeRepository.save(badgeDao)
 

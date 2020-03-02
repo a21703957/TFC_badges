@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import pt.ulusofona.badges.dao.Teacher
 
  interface TeacherRepository: JpaRepository<Teacher, Long> {
+   fun findByName(name: String): Teacher?
+
  }

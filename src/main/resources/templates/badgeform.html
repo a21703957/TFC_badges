@@ -14,12 +14,7 @@
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
                 <br>
 
-                <div class="col-sm-9">
-                    <label for="teacherName" class="col-sm-3 control-label">Teacher:</label>
-                    <input th:field="*{teacherName}" type="text" class="form-control" id="teacherName" placeholder="Teacher" required=""/>
-                    <div class = "valid-feedback"></div>
-                    <div class="invalid-feedback">Por favor, Insira a Descrição para o Badge</div>
-                                    </div>
+
                 <label for="name" class="col-sm-3 control-label">Nome:</label>
                 <div class="col-sm-9">
                     <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Nome do Badge" required=""/>
