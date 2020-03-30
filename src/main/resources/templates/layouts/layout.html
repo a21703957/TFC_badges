@@ -20,11 +20,19 @@
               <li class="nav-item active">
                   <a class="nav-link" th:href="@{/teacher/}">Home <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-              </li>
 
+              <div class="btn-group">
+                  <button type="button" class="btn btn-outline-secondary">Badge</button>
+                  <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" th:href="@{/teacher/badgeform}">Criar</a>
+                      <a class="dropdown-item" th:href="@{/teacher/badgesList}">Listar</a>
+                  </div>
+              </div>
 
+<!--                  <a class="nav-link" href="#">Link</a>-->
           </ul>
           <div class="btn-group">
               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +40,6 @@
               </button>
               <div class="dropdown-menu dropdown-menu-right">
                   <button class="dropdown-item" type="button">Badges</button>
-                  <a class="dropdown-item" th:href="@{/teacher/badgeform}">Formulário</a>
                   <button class="dropdown-item" type="button">Configurações</button>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" th:href="@{/logout}">Sair</a>

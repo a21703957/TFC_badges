@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import pt.ulusofona.badges.forms.BadgeForm
 import pt.ulusofona.badges.repositories.BadgeRepository
 import pt.ulusofona.badges.repositories.TeacherRepository
+import java.net.URL
 import java.security.Principal
+import javax.imageio.ImageIO
 import javax.validation.Valid
 
 @Controller
@@ -21,7 +23,7 @@ class TeacherController(
 ) {
     @GetMapping("/")
     fun index() : String{
-        return "teacherHome";
+        return "redirect:/teacher/badgesList";
     }
     //Mostra o formulário
     @GetMapping("/badgeform")
@@ -61,10 +63,26 @@ class TeacherController(
         return "badgecreated"
     }
 
+    @GetMapping("/badgesList")
+    fun listOfBadges( model : ModelMap ,principal: Principal):String{
+
+
+        val professor = teacherRepository.findByName(principal.name)
+        if (professor != null) {
+            val listOfBadges =  badgeRepository.findByTeacher(professor)
+            model["badges"] = listOfBadges
+        }
+
+
+        return "listOfBadges"
+    }
+
     @GetMapping("/listofstudents")
     fun listStudentes():String{
         return "listofstudents"
     }
+
+
 
 
 

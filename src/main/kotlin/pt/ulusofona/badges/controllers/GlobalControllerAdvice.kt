@@ -29,6 +29,11 @@ class GlobalControllerAdvice {
         return request.isUserInRole("TEACHER")
     }
 
+    @ModelAttribute("isStudent")
+    fun isStudent(request: HttpServletRequest): Boolean{
+        return request.isUserInRole("Student")
+    }
+
     @ModelAttribute("demoMode")
     fun isDemoMode() : Boolean {
         if (userDetailsManager != null && userDetailsManager is InMemoryUserDetailsManager) {
