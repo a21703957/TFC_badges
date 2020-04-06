@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import pt.ulusofona.badges.dao.Badge
 import pt.ulusofona.badges.forms.BadgeForm
 import pt.ulusofona.badges.repositories.BadgeRepository
 import pt.ulusofona.badges.repositories.TeacherRepository
@@ -66,12 +67,15 @@ class TeacherController(
     @GetMapping("/badgesList")
     fun listOfBadges( model : ModelMap ,principal: Principal):String{
 
-
         val professor = teacherRepository.findByName(principal.name)
         if (professor != null) {
             val listOfBadges =  badgeRepository.findByTeacher(professor)
-            model["badges"] = listOfBadges
+            model["badges"] = listOfBadges ?: emptyArray<Badge>()
+
         }
+
+
+
 
 
         return "listOfBadges"

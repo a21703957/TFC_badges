@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty
 
         var name: String? = null,
 
-
         var description: String? = null
 
 )

@@ -8,18 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link th:href="@{/css/layout.css}" rel="stylesheet" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-  <nav class = "navbar navbar-expand navbar-light flex-column flex-md-row bd-navbar bg-light" th:fragment="menu">
-      <a class ="navbar-brand " href="/" aria-label="Bootstrap">Strength your Skills</a>
+  <nav class = "navbar navbar-default navbar-expand navbar-light flex-column flex-md-row bd-navbar bg-light" th:fragment="menu">
+      <a class ="navbar-brand " href="/" aria-label="Bootstrap" th:href="@{/teacher/}">Strength your Skills</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <a class="nav-link" th:href="@{/teacher/}">Home <span class="sr-only">(current)</span></a>
-              </li>
+          <ul class="navbar-nav mr-auto" >
+<!--              <ul class="navbar-nav mr-auto" th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">-->
 
               <div class="btn-group">
                   <button type="button" class="btn btn-outline-secondary">Badge</button>
@@ -39,7 +40,6 @@
                   Perfil
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                  <button class="dropdown-item" type="button">Badges</button>
                   <button class="dropdown-item" type="button">Configurações</button>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" th:href="@{/logout}">Sair</a>

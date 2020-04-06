@@ -21,10 +21,17 @@ data class Badge (
         var toWin : String? = null,
 
         @Column(nullable = false)
-        var validacao: Validacao = Validacao.Externa){
+        var validacao: Validacao = Validacao.Externa
+
+
+){
 
         @ManyToOne
         lateinit var teacher: Teacher
+
+        @ManyToMany(mappedBy = "badges")
+        var students: List<Student> = mutableListOf<Student>()
+
 }
 
 
