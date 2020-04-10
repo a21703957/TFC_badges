@@ -11,12 +11,10 @@
         <br>
         <br>
         <br>
-        <br>
         <h1 th:text="${username}"></h1>
         <form method="post" th:action="@{/teacher/badgeform}" th:object="${badgeForm}" class ="needs-validation" novalidate>
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
                 <br>
-
 
                 <label for="name" class="col-sm-3 control-label">Nome:</label>
                 <div class="col-sm-9">
@@ -26,10 +24,19 @@
                     <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
                 </div>
             </div>
+            <div class="form-group " >
+                <label for="subject" class="col-sm-3 control-label">Disciplina:</label>
+                <div class="col-sm-9">
+                    <input th:field="*{subject}" type="text" class="form-control" id="subject" value="Universal" required=""/>
+                    <div class = "valid-feedback"></div>
+                    <div class = "invalid-feedback">Por favor, Insira a Disciplina</div>
+                    <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}">Error</p>
+                </div>
+            </div>
             <div class="form-group " th:classappend="${#fields.hasErrors('description')} ? 'has-error' : ''">
                 <label for="description" class="col-sm-3 control-label">Descrição:</label>
                 <div class="col-sm-9">
-                    <input th:field="*{description}" type="text" class="form-control" id="description" placeholder="Descrição do Badge" required=""/>
+                    <input th:field="*{description}" type="text" class="form-control" id="description" placeholder="Discrição do Badge"  required=""/>
                     <div class = "valid-feedback"></div>
                     <div class="invalid-feedback">Por favor, Insira a Descrição para o Badge</div>
                     <p class="help-block" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</p>

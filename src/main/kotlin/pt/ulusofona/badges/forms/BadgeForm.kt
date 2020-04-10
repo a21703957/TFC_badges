@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull
 data class BadgeForm (
         @field:NotEmpty(message = "Nome Obrigatório")
         var name : String? = null,
+        @field:NotEmpty(message = "Disciplina Obrigatória")
+        var subject : String? = null,
         @field:NotEmpty(message = "Descrição Obrigatória")
         var description : String? = null,
       /*  @field:NotEmpty(message = "Validação Obrigatória")
@@ -17,6 +19,7 @@ data class BadgeForm (
         @field:NotNull(message = "Error: Language must not be empty")
         var validacao: Validacao? = null,
         var teacherName : String? = null
+
 
 )
 

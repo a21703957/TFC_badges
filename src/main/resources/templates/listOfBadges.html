@@ -6,13 +6,18 @@
 
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
+    <br>
+    <br>
+    <br>
+
     <tr th:if="${badges.size() == 0}">
         <td colspan="2"> Sem Badges</td>
         <p th:text=" 'Nome: ' + ${badges.size()}"></p>
     <!--<img th:src="@{/img/badge1.png}" class="rounded float-left" alt="polyglota" width="304" height="304"/>-->
     </tr>
     <tr th:each="badge : ${badges}">
-        <td><span th:text="${badge.name}">Nome: </span></td>
+<!--        <td><span th:text="${badge.name}">Nome: </span></td>-->
+        <img th:src="@{/img/badge1.png}" class="rounded float-left" alt="polyglota" width="304" height="304"/>
     </tr>
 
 </body>

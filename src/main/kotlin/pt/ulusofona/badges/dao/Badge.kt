@@ -15,6 +15,9 @@ data class Badge (
         var name : String? = null,
 
         @Column(nullable = false)
+        var subject : String = "Universal",
+
+        @Column(nullable = false)
         var description : String? = null,
 
         @Column(nullable=false)
