@@ -16,25 +16,21 @@
 
 </head>
 <body>
-  <nav class = "navbar navbar-default navbar-expand navbar-light flex-column flex-md-row bd-navbar bg-light" th:fragment="menu">
-      <a class ="navbar-brand " href="/" aria-label="Bootstrap" th:href="@{/teacher/}">Strength your Skills</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <nav class = "navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:fragment="menu">
+      <a class ="navbar-brand " href="/"  th:href="@{/teacher/}">Strength your Skills</a>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto" >
-<!--              <ul class="navbar-nav mr-auto" th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">-->
-
-              <div class="btn-group">
-                  <button type="button" class="btn btn-outline-secondary">Badge</button>
-                  <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu">
+<!--              <li></li>-->
+              <li class="nav-item dropdown" th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Badge</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdown01">
                       <a class="dropdown-item" th:href="@{/teacher/badgeform}">Criar</a>
                       <a class="dropdown-item" th:href="@{/teacher/badgesList}">Listar</a>
                   </div>
-              </div>
+              </li>
 
-<!--                  <a class="nav-link" href="#">Link</a>-->
           </ul>
+
           <div class="btn-group">
               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Perfil

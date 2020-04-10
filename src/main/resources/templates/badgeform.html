@@ -9,6 +9,9 @@
     <div class="container">
 <!--        &lt;!&ndash;/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/&ndash;&gt;-->
         <br>
+        <br>
+        <br>
+        <br>
         <h1 th:text="${username}"></h1>
         <form method="post" th:action="@{/teacher/badgeform}" th:object="${badgeForm}" class ="needs-validation" novalidate>
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
