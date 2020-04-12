@@ -14,8 +14,8 @@ data class Badge (
         @Column(nullable = false)
         var name : String? = null,
 
-        @Column(nullable = false)
-        var subject : String = "Universal",
+        @Column(columnDefinition = "varchar(255) default 'Universal'")
+        var subject : String,
 
         @Column(nullable = false)
         var description : String? = null,

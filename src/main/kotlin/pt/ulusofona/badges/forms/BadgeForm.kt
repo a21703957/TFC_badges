@@ -9,7 +9,7 @@ data class BadgeForm (
         @field:NotEmpty(message = "Nome Obrigatório")
         var name : String? = null,
         @field:NotEmpty(message = "Disciplina Obrigatória")
-        var subject : String? = null,
+        var subject : String = "Universal",
         @field:NotEmpty(message = "Descrição Obrigatória")
         var description : String? = null,
       /*  @field:NotEmpty(message = "Validação Obrigatória")
