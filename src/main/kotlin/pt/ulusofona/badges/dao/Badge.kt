@@ -15,7 +15,7 @@ data class Badge (
         var name : String? = null,
 
         @Column(columnDefinition = "varchar(255) default 'Universal'")
-        var subject : String,
+        var subject : String? = null,
 
         @Column(nullable = false)
         var description : String? = null,
@@ -28,6 +28,8 @@ data class Badge (
 
 
 ){
+
+
 
         @ManyToOne
         lateinit var teacher: Teacher

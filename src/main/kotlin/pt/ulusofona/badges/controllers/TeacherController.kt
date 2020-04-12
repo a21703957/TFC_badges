@@ -47,7 +47,7 @@ class TeacherController(
 
         val badgeDao = pt.ulusofona.badges.dao.Badge(
                 name = badgeForm.name,
-                subject = badgeForm.subject,
+                subject = badgeForm.subject!!,
                 description = badgeForm.description,
                 toWin = badgeForm.toWin,
                 validacao = badgeForm.validacao!!)
@@ -74,11 +74,6 @@ class TeacherController(
             model["badges"] = listOfBadges ?: emptyArray<Badge>()
 
         }
-
-
-
-
-
         return "listOfBadges"
     }
 
