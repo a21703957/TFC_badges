@@ -34,7 +34,7 @@
                 <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
                 <p th:text=" 'Descrição: ' + ${badgeForm.description}"></p>
                 <p th:text=" 'Como Ganhar: ' + ${badgeForm.toWin}"></p>
-                <a th:href="@{/teacher/badgeform}">Adicionar novo Badge</a>
+                <a th:href="@{/teacher/badgeform}" class="btn btn-info btn-sm" role="button" aria-pressed="true">Novo Badge</a>
             </figcaption>
         </figure>
 
