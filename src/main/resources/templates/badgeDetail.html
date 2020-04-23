@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layout :: head (title = 'Badge Submetido')">
+
+</head>
+<body>
+<div th:replace="layouts/layout :: menu"> </div>
+<br>
+<br>
+<h1>Detalhe</h1>
+<br>
+<!--/*@thymesVar id="badge" type="pt.ulusofona.badges.dao.Badge"*/-->
+<div>
+    <!--/*@thymesVar id="badgy" type="pt.ulusofona.badges.dao.Badge"*/-->
+    <form th:action="@{/teacher/detailBadge}" th:object="${badge}" method="get">
+        <output th:text=" 'Nome: ' + ${badge.name}"></output>
+    </form>
+    <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+    <p th:text=" 'Nome: ' + ${badge.name}"></p>
+    <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+    <p th:text=" 'Descrição: ' + ${badge.description}"></p>
+    <p th:text=" 'Como Ganhar: ' + ${badge.toWin}"></p>
+</div>
+
+<!--    <img src="./img/logo.png">-->
+
+
+</body>
+</html>

@@ -3,16 +3,14 @@ package pt.ulusofona.badges.controllers
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import pt.ulusofona.badges.dao.Badge
 import pt.ulusofona.badges.forms.BadgeForm
 import pt.ulusofona.badges.repositories.BadgeRepository
 import pt.ulusofona.badges.repositories.TeacherRepository
 import java.net.URL
 import java.security.Principal
+import java.util.*
 import javax.imageio.ImageIO
 import javax.validation.Valid
 
@@ -47,7 +45,11 @@ class TeacherController(
 
         val badgeDao = pt.ulusofona.badges.dao.Badge(
                 name = badgeForm.name,
-                subject = badgeForm.subject!!,
+//                subject = badgeForm.subject!!,
+                year = badgeForm.year!!,
+                LEI = badgeForm.LEI,
+                LEIRT =  badgeForm.LEIRT,
+                LIG = badgeForm.LIG,
                 description = badgeForm.description,
                 toWin = badgeForm.toWin,
                 validacao = badgeForm.validacao!!)
@@ -65,6 +67,16 @@ class TeacherController(
         return "badgecreated"
     }
 
+    @GetMapping("/detailBadge")
+    @ResponseBody
+    fun detailBadge(id: Long): Optional<Badge> {
+
+         //   model["badges"] = badgeRepository.findById(badge.id)
+        /*model["badge"] = badgeRepository.findById(badge.id)
+        return "badgeDetail"*/
+        return badgeRepository.findById(id)
+    }
+
     @GetMapping("/badgesList")
     fun listOfBadges( model : ModelMap ,principal: Principal):String{
 
@@ -75,6 +87,13 @@ class TeacherController(
 
         }
         return "listOfBadges"
+    }
+
+    @GetMapping("/badgeDetail")
+    fun badgeDetail(model : ModelMap, badge: Badge): String{
+
+
+        return "badgeDetail"
     }
 
     @GetMapping("/listofstudents")

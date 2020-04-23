@@ -3,20 +3,41 @@
 <head th:replace="layouts/layout :: head (title = 'Badge Submetido')">
 
 </head>
+
+<style>
+    figure{
+        display: inline-flex;
+    }
+    figure img{
+        horiz-align: center;
+    }
+    figure figcaption{
+
+        text-align: left;
+    }
+</style>
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
     <br>
     <br>
-    <h1>Badge Criado</h1>
+    <h1 style="text-align: center;  margin-top: 25px">Badge Criado</h1>
     <br>
-    <div >
+
+    <div style="margin-left: 30px">
+
         <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-        <p th:text=" 'Nome: ' + ${badgeForm.name}"></p>
-        <p th:text=" 'Disciplina: ' + ${badgeForm.subject}"></p>
-        <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-        <p th:text=" 'Descrição: ' + ${badgeForm.description}"></p>
-        <p th:text=" 'Como Ganhar: ' + ${badgeForm.toWin}"></p>
-        <a th:href="@{/teacher/badgeform}">Adicionar novo Badge</a>
+        <figure >
+            <img  th:src=" @{/img/badge2.png} "  class="rounded float-left" alt="polyglota" width="270" height="270"/>
+            <figcaption>
+                <p th:text=" 'Nome: ' + ${badgeForm.name}"></p>
+
+                <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+                <p th:text=" 'Descrição: ' + ${badgeForm.description}"></p>
+                <p th:text=" 'Como Ganhar: ' + ${badgeForm.toWin}"></p>
+                <a th:href="@{/teacher/badgeform}">Adicionar novo Badge</a>
+            </figcaption>
+        </figure>
+
     </div>
 
 <!--    <img src="./img/logo.png">-->

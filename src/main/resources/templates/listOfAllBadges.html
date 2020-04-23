@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/layout :: head (title = 'Home Professor')">
+<head th:replace="layouts/layout :: head (title = 'Home Student')">
 
 </head>
 <style>
@@ -15,31 +15,32 @@
     figure figcaption {
         font-weight: bold;
         text-align: center;
-
     }
 
 </style>
+
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
     <br>
     <br>
     <br>
 
+
     <tr th:if="${badges.size() == 0}">
         <td colspan="2"> Sem Badges</td>
         <p th:text=" 'Número de Badges: ' + ${badges.size()}"></p>
         <!--<img th:src="@{/img/badge1.png}" class="rounded float-left" alt="polyglota" width="304" height="304"/>-->
     </tr>
+    <h4 style="margin-left: 30px" th:text=" 'Badges Disponíveis: ' + ${badges.size()}"></h4>
     <tr th:each="badge : ${badges}">
         <!--        <td><span th:text="${badge.name}">Nome: </span></td>-->
         <figure>
-            <a th:href="@{/teacher/detailBadge/(id=${badge.id})}">
-                <img th:src=" @{/img/badge2.png} "  class="rounded float-left" alt="polyglota" width="230" height="230"/>
-            </a>
+            <img th:src=" @{/img/badge2.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
             <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
-
         </figure>
     </tr>
+
+
 
 </body>
 </html>

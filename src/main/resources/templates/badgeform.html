@@ -11,10 +11,10 @@
         <br>
         <br>
         <br>
-        <h1 th:text="${username}"></h1>
+<!--        th:text="${username}"-->
+        <h2  style="text-align: center"> Criar Badge</h2>
         <form method="post" th:action="@{/teacher/badgeform}" th:object="${badgeForm}" class ="needs-validation" novalidate>
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
-                <br>
 
                 <label for="name" class="col-sm-3 control-label">Nome:</label>
                 <div class="col-sm-9">
@@ -24,13 +24,47 @@
                     <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
                 </div>
             </div>
-            <div class="form-group " >
+           <!-- <div class="form-group " >
                 <label for="subject" class="col-sm-3 control-label">Disciplina:</label>
                 <div class="col-sm-9">
                     <input th:field="*{subject}" type="text" class="form-control" id="subject" value="Universal" required=""/>
                     <div class = "valid-feedback"></div>
                     <div class = "invalid-feedback">Por favor, Insira a Disciplina</div>
                     <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}">Error</p>
+                </div>
+            </div>-->
+            <div class="form-group">
+                <label for="year" class="col-sm-5 control-label">Curso:</label>
+                <div style="margin-left: 30px">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"  th:field="*{LEI}" />
+                        <label  class="form-check-label" th:for="${#ids.next('LEI')}">LEI</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" th:field="*{LIG}" />
+                        <label class="form-check-label" th:for="${#ids.next('LIG')}">LIG</label>
+
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" th:field="*{LEIRT}" />
+                        <label class="form-check-label" th:for="${#ids.next('LEIRT')}">LEIRT</label>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('year')} ? 'has-error' : ''">
+                <label for="year" class="col-sm-5 control-label">Ano Curricular:</label>
+                <div class="col-sm-2">
+                    <select th:field="*{year}" class="form-control" id="year">
+                        <option value="Todos" th:selected="${badgeForm.validacao=='Todos'}">Todos</option>
+                        <option value="Primeiro" th:selected="${badgeForm.validacao=='Primeiro'}">1º Ano</option>
+                        <option value="Segundo" th:selected="${badgeForm.validacao=='Segundo'}">2º Ano</option>
+                        <option value="Terceiro" th:selected="${badgeForm.validacao=='Terceiro'}">3º Ano</option>
+                    </select>
+                    <!-- <p class="help-block" th:if="${#fields.hasErrors('validacao')}" th:errors="*{validacao}">Error</p>
+                     <p class="help-block" th:if="${!#fields.hasErrors('validacao')}" >Escolha uma das opções</p>-->
                 </div>
             </div>
             <div class="form-group " th:classappend="${#fields.hasErrors('description')} ? 'has-error' : ''">
@@ -54,7 +88,7 @@
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('validacao')} ? 'has-error' : ''">
                 <label for="validacao" class="col-sm-5 control-label">Validação Interna ou Externa à Plataforma:</label>
-                <div class="col-sm-9">
+                <div class="col-sm-3">
                     <select th:field="*{validacao}" class="form-control" id="validacao">
                         <option value="Externa" th:selected="${badgeForm.validacao=='Externa'}">Externa</option>
                         <option value="Interna" th:selected="${badgeForm.validacao=='Interna'}">Interna</option>
