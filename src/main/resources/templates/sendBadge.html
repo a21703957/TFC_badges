@@ -5,10 +5,64 @@
 </head>
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
-    <br>
-    <br>
-    <h2 style="text-align: center;  margin-top: 25px">Entregar Badge</h2>
+    <div class="container">
+        <br>
+        <br>
+        <h2 style="text-align: center;  margin-top: 25px">Entregar Badge</h2>
+        <form method="post" th:action="@{/teacher/sendBadges}" th:object="${sendBadgeForm}" class ="needs-validation" novalidate >
+            <div class="form-group" th:classappend="${#fields.hasErrors('badge')} ? 'has-error' : ''">
+                <label for="badge" class="col-sm-3 control-label">Badge:</label>
+                <div class="col-sm-5">
+                    <input th:field="*{badge}" type="text" class="form-control" id="badge" placeholder="Nome do Badge" required=""/>
+                    <div class = "valid-feedback"></div>
+                    <div class = "invalid-feedback">Por favor, Insira o nome do Badge/div>
+                        <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('badge')}" th:errors="*{badge}">Error</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('alunos')} ? 'has-error' : ''">
+                <label for="alunos" class="col-sm-3 control-label">Alunos:</label>
+                <div class="col-sm-5">
+                    <input th:field="*{alunos}" type="text" class="form-control" id="alunos" placeholder="Número do/os Aluno/os" required=""/>
+                    <div class = "valid-feedback"></div>
+                    <div class = "invalid-feedback">Por favor, Insira o/os número/os do/os aluno/os</div>
+                    <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('alunos')}" th:errors="*{alunos}">Error</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submeter</button> <button type="reset" class="btn btn-primary">Repor</button>
+            </div>
+
+        </form>
+        <script>
+            // Disable form submissions if there are invalid fields
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Get the forms we want to add validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
+    </div>
 
 
 </body>
 </html>
+
+<!-- <div class="col-md-2">
+              <label for="validationTextarea">Alunos:</label>
+              <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Id dos Alunos" required></textarea>
+
+          </div>-->

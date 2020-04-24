@@ -27,6 +27,7 @@ class StudentController(
         if(student==null) {
             student = pt.ulusofona.badges.dao.Student(
                     name = principal.name
+
             )
             studentRepository.save(student)
         }

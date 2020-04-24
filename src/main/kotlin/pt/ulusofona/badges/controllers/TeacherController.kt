@@ -5,21 +5,28 @@ import org.springframework.ui.ModelMap
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import pt.ulusofona.badges.dao.Badge
+import pt.ulusofona.badges.dao.Student
 import pt.ulusofona.badges.forms.BadgeForm
+import pt.ulusofona.badges.forms.SendForm
 import pt.ulusofona.badges.repositories.BadgeRepository
+import pt.ulusofona.badges.repositories.StudentRepository
 import pt.ulusofona.badges.repositories.TeacherRepository
 import java.net.URL
 import java.security.Principal
 import java.util.*
 import javax.imageio.ImageIO
 import javax.validation.Valid
+import kotlin.collections.ArrayList
 
 @Controller
 @RequestMapping("/teacher")
 class TeacherController(
         val badgeRepository: BadgeRepository,
-        val teacherRepository: TeacherRepository
+        val teacherRepository: TeacherRepository,
+        val studentRepository: StudentRepository
+
 ) {
+    lateinit var listaBadges: MutableList<Badge>
     @GetMapping("/")
     fun index() : String{
         return "redirect:/teacher/badgesList";
@@ -97,6 +104,38 @@ class TeacherController(
 
         }
         return "listOfBadges"
+    }
+
+    @GetMapping("/sendBadge")
+    fun sendBadge(model: ModelMap): String{
+        model["sendBadgeForm"] = SendForm()
+        return "sendBadge"
+    }
+    @PostMapping("/sendBadge")
+    fun processSendForm(@Valid @ModelAttribute("sendBadgeForm")sendForm: SendForm,
+                    bindingResult: BindingResult, principal:Principal) : String{
+
+        if(bindingResult.hasErrors()){
+            return "sendBadge"
+        }
+
+
+        var badge = sendForm.badge
+
+        var badgeGanho = badgeRepository.findByName(badge!!)
+        var alunos = sendForm.alunos?.split(",")
+
+        for(a in alunos!!){
+            var aluno = pt.ulusofona.badges.dao.Student(
+                    name = a
+            )
+            listaBadges.add(badgeGanho!!)
+            aluno.badges = listaBadges
+
+            studentRepository.save(aluno)
+        }
+
+        return "redirect:/teacher/listOfBadges"
     }
 
     @GetMapping("/badgeDetail")
