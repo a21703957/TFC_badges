@@ -14,6 +14,10 @@ enum class Curso{
     LEI, LEIRT, LIG
 }
 
+enum class Category{
+        Soft, Hybrid, Hard
+}
+
 @Entity
 data class Badge (
         @Id @GeneratedValue
@@ -33,6 +37,9 @@ data class Badge (
         var subject : String? = null,*/
         @Column(nullable = false)
         var year : Year = Year.Todos,
+
+        @Column(nullable = false)
+        var category: Category = Category.Soft,
 
         @Column(nullable = false)
         var description : String? = null,

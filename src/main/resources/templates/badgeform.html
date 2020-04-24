@@ -69,6 +69,19 @@
 
             </div>
 
+            <div class="form-group" th:classappend="${#fields.hasErrors('category')} ? 'has-error' : ''">
+                <label for="category" class="col-sm-5 control-label">Categoria:</label>
+                <div class="col-sm-3">
+                    <select th:field="*{category}" class="form-control" id="category">
+                        <option value="Soft" th:selected="${badgeForm.validacao=='Externa'}">Soft</option>
+                        <option value="Hybrid" th:selected="${badgeForm.validacao=='Interna'}">Hybrid</option>
+                        <option value="Hard" th:selected="${badgeForm.validacao=='Hard'}">Hard</option>
+                    </select>
+                    <!-- <p class="help-block" th:if="${#fields.hasErrors('validacao')}" th:errors="*{validacao}">Error</p>
+                     <p class="help-block" th:if="${!#fields.hasErrors('validacao')}" >Escolha uma das opções</p>-->
+                </div>
+            </div>
+
             <div class="form-group" th:classappend="${#fields.hasErrors('validacao')} ? 'has-error' : ''">
                 <label for="validacao" class="col-sm-5 control-label">Validação:</label>
                 <div class="col-sm-3">

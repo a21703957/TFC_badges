@@ -1,5 +1,6 @@
 package pt.ulusofona.badges.forms
 
+import pt.ulusofona.badges.dao.Category
 import pt.ulusofona.badges.dao.Teacher
 import pt.ulusofona.badges.dao.Validacao
 import pt.ulusofona.badges.dao.Year
@@ -19,6 +20,8 @@ data class BadgeForm (
         var LEIRT : Boolean = false,
         @field:NotNull(message = "Erro:Subject must not be empty")
         var LIG : Boolean = false,
+        @field:NotNull(message = "Error: Category must not be empty")
+        var category: Category? = null,
         @field:NotEmpty(message = "Descrição Obrigatória")
         var description : String? = null,
         @field:NotEmpty(message="Campo Obrigatório")

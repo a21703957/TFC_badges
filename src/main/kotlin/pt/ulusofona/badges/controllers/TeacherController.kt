@@ -59,6 +59,7 @@ class TeacherController(
                 LEI = badgeForm.LEI,
                 LEIRT =  badgeForm.LEIRT,
                 LIG = badgeForm.LIG,
+                category = badgeForm.category!!,
                 description = badgeForm.description,
                 toWin = badgeForm.toWin,
                 validacao = badgeForm.validacao!!)

@@ -29,7 +29,7 @@
         <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
 
         <figure>
-            <img  th:src=" @{/img/badge2.png} "  class="rounded float-left" alt="polyglota" width="270" height="270"/>
+            <img  th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="270" height="270"/>
             <figcaption >
                 <p th:text=" 'Nome: ' + ${badgeForm.name}"></p>
                 <div class="row">
@@ -38,6 +38,7 @@
                     </div>
                 </div>
                 <p th:text=" 'Ano Curricular: ' + ${badgeForm.year}"></p>
+                <p th:text="'Categoria: ' + ${badgeForm.category} + ' skills'"></p>
                 <p th:text=" 'Validação: ' + ${badgeForm.validacao}"></p>
 
                 <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->

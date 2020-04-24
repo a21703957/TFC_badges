@@ -29,13 +29,12 @@
     <tr th:if="${badges.size() == 0}">
         <td colspan="2"> Sem Badges</td>
         <p th:text=" 'Número de Badges: ' + ${badges.size()}"></p>
-        <!--<img th:src="@{/img/badge1.png}" class="rounded float-left" alt="polyglota" width="304" height="304"/>-->
     </tr>
     <h4 style="margin-left: 30px" th:text=" 'Badges Disponíveis: ' + ${badges.size()}"></h4>
     <tr th:each="badge : ${badges}">
         <!--        <td><span th:text="${badge.name}">Nome: </span></td>-->
         <figure>
-            <img th:src=" @{/img/badge2.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
+            <img th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
             <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
         </figure>
     </tr>
