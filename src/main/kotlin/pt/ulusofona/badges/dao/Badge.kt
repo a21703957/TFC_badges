@@ -46,8 +46,6 @@ data class Badge (
 
 ){
 
-
-
         @ManyToOne
         lateinit var teacher: Teacher
 

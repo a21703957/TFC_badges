@@ -34,6 +34,15 @@ class TeacherController(
         return "badgeform"
     }
 
+    @GetMapping("/badgee")
+    fun detail(model : ModelMap, principal: Principal):String{
+        model["badge"] = Badge()
+
+        println("user em sessão: ${principal.name}")
+
+        return "badgeDetail"
+    }
+
     @PostMapping("/badgeform")
     fun processForm(@Valid @ModelAttribute("badgeForm")badgeForm: BadgeForm,
                     bindingResult: BindingResult, principal:Principal) : String{
