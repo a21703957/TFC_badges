@@ -9,7 +9,7 @@
         <br>
         <br>
         <h2 style="text-align: center;  margin-top: 25px">Entregar Badge</h2>
-        <form method="post" th:action="@{/teacher/sendBadges}" th:object="${sendBadgeForm}" class ="needs-validation" novalidate >
+        <form method="post" th:action="@{/teacher/sendBadge}" th:object="${sendBadgeForm}" class ="needs-validation" novalidate >
             <div class="form-group" th:classappend="${#fields.hasErrors('badge')} ? 'has-error' : ''">
                 <label for="badge" class="col-sm-3 control-label">Badge:</label>
                 <div class="col-sm-5">

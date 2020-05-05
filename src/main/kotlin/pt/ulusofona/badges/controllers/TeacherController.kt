@@ -27,7 +27,7 @@ class TeacherController(
         val studentRepository: StudentRepository
 
 ) {
-    lateinit var listaBadges: MutableList<Badge>
+    private var listaBadges: MutableList<Badge> = mutableListOf()
     @GetMapping("/")
     fun index() : String{
         return "redirect:/teacher/badgesList";
@@ -125,6 +125,8 @@ class TeacherController(
     fun processSendForm(@Valid @ModelAttribute("sendBadgeForm")sendForm: SendForm,
                     bindingResult: BindingResult, principal:Principal) : String{
 
+
+
         if(bindingResult.hasErrors()){
             return "sendBadge"
         }
@@ -139,26 +141,24 @@ class TeacherController(
             var aluno = pt.ulusofona.badges.dao.Student(
                     name = a
             )
-            listaBadges.add(badgeGanho!!)
+           listaBadges.add(badgeGanho!!)
             aluno.badges = listaBadges
+
 
             studentRepository.save(aluno)
         }
 
-        return "redirect:/teacher/listOfBadges"
+        return "sended"
     }
 
-    @GetMapping("/badgeDetail")
-    fun badgeDetail(model : ModelMap, badge: Badge): String{
 
 
-        return "badgeDetail"
-    }
-
+/*
     @GetMapping("/listofstudents")
     fun listStudentes():String{
         return "listofstudents"
     }
+*/
 
 
 
