@@ -15,6 +15,7 @@ import java.net.URL
 import java.security.Principal
 import java.util.*
 import javax.imageio.ImageIO
+import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 import kotlin.collections.ArrayList
 
@@ -40,7 +41,7 @@ class TeacherController(
 
         return "badgeform"
     }
-
+/*
     @GetMapping("/badgee")
     fun detail(model : ModelMap, principal: Principal):String{
         model["badge"] = Badge()
@@ -48,6 +49,14 @@ class TeacherController(
         println("user em sessão: ${principal.name}")
 
         return "badgeDetail"
+    }*/
+
+    @GetMapping(value = ["/detailBadge/{badge.id}"])
+    fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest): String{
+        val badge = badgeRepository.findById(badgeId)
+        print("ESTE" + badge)
+
+        return "sendBadge"
     }
 
     @PostMapping("/badgeform")
@@ -66,6 +75,7 @@ class TeacherController(
                 LEI = badgeForm.LEI,
                 LEIRT =  badgeForm.LEIRT,
                 LIG = badgeForm.LIG,
+                avaliation = badgeForm.avaliation!!,
                 category = badgeForm.category!!,
                 description = badgeForm.description,
                 toWin = badgeForm.toWin,

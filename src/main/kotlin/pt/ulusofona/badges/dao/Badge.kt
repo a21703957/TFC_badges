@@ -18,6 +18,10 @@ enum class Category{
         Soft, Hybrid, Hard
 }
 
+enum class Avaliation{
+        Sim, Nao
+}
+
 @Entity
 data class Badge (
         @Id @GeneratedValue
@@ -37,6 +41,9 @@ data class Badge (
         var subject : String? = null,*/
         @Column(nullable = false)
         var year : Year = Year.Todos,
+
+        @Column(nullable=false)
+        var avaliation: Avaliation = Avaliation.Sim,
 
         @Column(nullable = false)
         var category: Category = Category.Soft,

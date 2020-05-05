@@ -69,6 +69,18 @@
 
             </div>
 
+            <div class="form-group" th:classappend="${#fields.hasErrors('avaliation')} ? 'has-error' : ''">
+                <label for="avaliation" class="col-sm-5 control-label">Elemento de Avaliação:</label>
+                <div class="col-sm-3">
+                    <select th:field="*{avaliation}" class="form-control" id="avaliation">
+                        <option value="Sim" th:selected="${badgeForm.avaliation=='Sim'}">Sim</option>
+                        <option value="Nao" th:selected="${badgeForm.avaliation=='Nao'}">Não</option>
+                    </select>
+
+                </div>
+
+            </div>
+
             <div class="form-group" th:classappend="${#fields.hasErrors('category')} ? 'has-error' : ''">
                 <label for="category" class="col-sm-5 control-label">Categoria:</label>
                 <div class="col-sm-3">
@@ -77,9 +89,15 @@
                         <option value="Hybrid" th:selected="${badgeForm.validacao=='Interna'}">Hybrid</option>
                         <option value="Hard" th:selected="${badgeForm.validacao=='Hard'}">Hard</option>
                     </select>
+
                     <!-- <p class="help-block" th:if="${#fields.hasErrors('validacao')}" th:errors="*{validacao}">Error</p>
                      <p class="help-block" th:if="${!#fields.hasErrors('validacao')}" >Escolha uma das opções</p>-->
                 </div>
+                <small id="CategoryHelpBlock" class="form-text text-muted">
+                    Soft -> desafios não técnicos ou comportamentais |
+                    Hard -> desafios técnicos onde se apliquem os conhecimentos adquiridos ao longo das aulas |
+                    Hybrid -> junção das Soft e Hard Skills
+                </small>
             </div>
 
             <div class="form-group" th:classappend="${#fields.hasErrors('validacao')} ? 'has-error' : ''">
@@ -92,6 +110,10 @@
                     <!-- <p class="help-block" th:if="${#fields.hasErrors('validacao')}" th:errors="*{validacao}">Error</p>
                      <p class="help-block" th:if="${!#fields.hasErrors('validacao')}" >Escolha uma das opções</p>-->
                 </div>
+                <small id="ValidationHelpBlock" class="form-text text-muted">
+                    Externa -> Validação fora desta plataforma |
+                    Interna -> Validação dentro desta plataforma
+                </small>
             </div>
 
             <div class="form-group " th:classappend="${#fields.hasErrors('description')} ? 'has-error' : ''">
@@ -102,6 +124,9 @@
                     <div class="invalid-feedback">Por favor, Insira a Descrição para o Badge</div>
                     <p class="help-block" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</p>
                 </div>
+                <small id="DescriptionHelpBlock" class="form-text text-muted">
+                    Descrição sobre em que consiste o desafio
+                </small>
 
             </div>
             <div class="form-group " th:classappend="${#fields.hasErrors('toWin')} ? 'has-error' : ''">
@@ -112,7 +137,9 @@
                     <div class="invalid-feedback">Por favor, Indique como ganhar o Badge</div>
                     <p class="help-block" th:if="${#fields.hasErrors('toWin')}" th:errors="*{toWin}">Error</p>
                 </div>
-
+                <small id="ToWinHelpBlock" class="form-text text-muted">
+                    Descrição sobre o que fazer para resolver o desafio
+                </small>
             </div>
 
             <div class="text-center">

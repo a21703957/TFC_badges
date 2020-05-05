@@ -31,8 +31,8 @@
     </tr>
     <tr th:each="badge : ${badges}">
         <!--       (id=${badge.id}) <td><span th:text="${badge.name}">Nome: </span></td>-->
-        <figure>
-            <a th:href="@{/teacher/badgee/}">
+        <figure><!--?getId=${thread.id}-->
+            <a th:href="@{'/teacher/detailBadge'+ ${badge.id}}">
                 <img th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="230" height="230"/>
             </a>
             <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>

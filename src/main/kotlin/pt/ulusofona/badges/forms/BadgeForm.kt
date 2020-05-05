@@ -1,9 +1,6 @@
 package pt.ulusofona.badges.forms
 
-import pt.ulusofona.badges.dao.Category
-import pt.ulusofona.badges.dao.Teacher
-import pt.ulusofona.badges.dao.Validacao
-import pt.ulusofona.badges.dao.Year
+import pt.ulusofona.badges.dao.*
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
@@ -14,6 +11,8 @@ data class BadgeForm (
         var subject : String? = "Universal",*/
         @field:NotNull(message = "Error: Language must not be empty")
         var year : Year? = null,
+        @field:NotNull(message = "Erros: Avaliation must not be empty")
+        var avaliation : Avaliation? = null,
         @field:NotNull(message = "Erro:Subject must not be empty")
         var LEI : Boolean = false,
         @field:NotNull(message = "Erro:Subject must not be empty")
