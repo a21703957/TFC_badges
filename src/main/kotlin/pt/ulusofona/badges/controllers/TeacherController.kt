@@ -117,22 +117,25 @@ class TeacherController(
     }
 
     @GetMapping("/sendBadge")
-    fun sendBadge(model: ModelMap): String{
+    fun sendBadge(model: ModelMap, principal: Principal): String{
         model["sendBadgeForm"] = SendForm()
+        val professor = teacherRepository.findByName(principal.name)
+        if(professor != null){
+            val listOfBadges = badgeRepository.findByTeacher(professor)
+            model["badges"] = listOfBadges ?: emptyArray<Badge>()
+        }
+
         return "sendBadge"
     }
     @PostMapping("/sendBadge")
     fun processSendForm(@Valid @ModelAttribute("sendBadgeForm")sendForm: SendForm,
-                    bindingResult: BindingResult, principal:Principal) : String{
-
-
+                    bindingResult: BindingResult) : String{
 
         if(bindingResult.hasErrors()){
             return "sendBadge"
         }
 
-
-        var badge = sendForm.badge
+        var badge = sendForm.badge?.name
 
         var badgeGanho = badgeRepository.findByName(badge!!)
         var alunos = sendForm.alunos?.split(",")

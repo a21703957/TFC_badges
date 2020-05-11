@@ -13,11 +13,16 @@
             <div class="form-group" th:classappend="${#fields.hasErrors('badge')} ? 'has-error' : ''">
                 <label for="badge" class="col-sm-3 control-label">Badge:</label>
                 <div class="col-sm-5">
-                    <input th:field="*{badge}" type="text" class="form-control" id="badge" placeholder="Nome do Badge" required=""/>
+                    <select th:field="*{badge}" class="form-control" id="badge">
+                        <option th:each="badge : ${badges}"
+                          th:value="${badge.name}" th:text="${badge.name}" ></option>
+                    </select>
+
+                    <!--<input th:field="*{badge}" type="text" class="form-control" id="badge" placeholder="Nome do Badge" required=""/>
                     <div class = "valid-feedback"></div>
                     <div class = "invalid-feedback">Por favor, Insira o nome do Badge/div>
                         <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('badge')}" th:errors="*{badge}">Error</p>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('alunos')} ? 'has-error' : ''">
