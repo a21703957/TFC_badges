@@ -3,12 +3,29 @@
 <head th:replace="layouts/layout :: head (title = 'Home Professor')">
 
 </head>
+
 <body>
 <div th:replace="layouts/layout :: menu"> </div>
 <br>
 <br>
-<h2 style="text-align: center;  margin-top: 25px">Badge Enviado</h2>
-<br>
+    <div class="container">
+        <h2 style="text-align: center;  margin-top: 25px">Badge Enviado</h2>
+        <br>
+        <div class="row col-md-3 table-responsive">
+            <table  id="customerTable" class="table">
+                <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Nº Aluno</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 
 </body>
 </html>
