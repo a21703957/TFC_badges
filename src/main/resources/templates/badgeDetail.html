@@ -12,9 +12,7 @@
 <!--/*@thymesVar id="badge" type="pt.ulusofona.badges.dao.Badge"*/-->
 <div>
     <!--/*@thymesVar id="badgy" type="pt.ulusofona.badges.dao.Badge"*/-->
-    <form th:action="@{/teacher/detailBadge}" th:object="${badge}" method="get">
-        <output th:text=" 'Nome: ' + ${badge.name}"></output>
-    </form>
+
     <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
     <p th:text=" 'Nome: ' + ${badge.name}"></p>
     <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->

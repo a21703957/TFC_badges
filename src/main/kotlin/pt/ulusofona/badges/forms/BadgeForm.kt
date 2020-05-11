@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull
 
 data class BadgeForm (
         @field:NotEmpty(message = "Nome Obrigatório")
-        var name : String? = null,
+        var name : String = "",
         /*@field:NotEmpty(message = "Disciplina Obrigatória")
         var subject : String? = "Universal",*/
         @field:NotNull(message = "Error: Language must not be empty")

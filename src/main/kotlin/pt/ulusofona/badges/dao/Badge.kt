@@ -28,7 +28,7 @@ data class Badge (
         var id : Long = 0,
 
         @Column(nullable = false)
-        var name : String? = null,
+        var name : String = "",
 
         @Column(nullable = false)
         var LEI : Boolean = false,

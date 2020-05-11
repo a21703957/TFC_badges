@@ -51,12 +51,13 @@ class TeacherController(
         return "badgeDetail"
     }*/
 
-    @GetMapping(value = ["/detailBadge/{badge.id}"])
+    @GetMapping(value = ["/detailBadge/{badgeId}"])
     fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest): String{
         val badge = badgeRepository.findById(badgeId)
+        model["badge"] = badge
         print("ESTE" + badge)
 
-        return "sendBadge"
+        return "badgeDetail"
     }
 
     @PostMapping("/badgeform")
