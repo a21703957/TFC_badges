@@ -8,6 +8,12 @@ import pt.ulusofona.badges.dao.Badge
 import pt.ulusofona.badges.repositories.BadgeRepository
 import pt.ulusofona.badges.repositories.StudentRepository
 import java.security.Principal
+import org.springframework.web.bind.annotation.PathVariable
+import java.util.*
+import org.springframework.ui.Model
+
+
+
 
 @Controller
 @RequestMapping("/student")
@@ -24,15 +30,26 @@ class StudentController(
     fun listofAllBadges(model : ModelMap, principal: Principal): String{
         model["badges"] = badgeRepository.findAll()
         var student = studentRepository.findByName(principal.name)
+
         if(student==null) {
             student = pt.ulusofona.badges.dao.Student(
                     name = principal.name
-
             )
             studentRepository.save(student)
         }
 
-        return "listOfAllBadges"
+        print("Badegs aluno " + student.badges.size)
+
+        return "index"
+    }
+
+    @GetMapping("{tab}")
+    fun tab(@PathVariable tab: String): String {
+        return if (Arrays.asList("tab1", "tab2", "tab3")
+                        .contains(tab)) {
+            "_$tab"
+        } else "empty"
+
     }
 
 

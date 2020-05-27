@@ -15,7 +15,8 @@ data class Student(
         @JoinTable(name = "student_badge",
                 joinColumns = arrayOf(JoinColumn(name = "student_id", referencedColumnName = "id")),
                 inverseJoinColumns = arrayOf(JoinColumn(name = "badge_id", referencedColumnName = "id")))
-    var badges: List<Badge> = mutableListOf<Badge>()
+
+    var badges: Set<Badge> = HashSet<Badge>()
 
 
 }

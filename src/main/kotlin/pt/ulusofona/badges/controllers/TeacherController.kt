@@ -16,11 +16,17 @@ import pt.ulusofona.badges.repositories.StudentRepository
 import pt.ulusofona.badges.repositories.TeacherRepository
 import java.net.URL
 import java.security.Principal
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.imageio.ImageIO
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 import kotlin.collections.ArrayList
+
+
+
 
 @Controller
 @RequestMapping("/teacher")
@@ -30,11 +36,13 @@ class TeacherController(
         val studentRepository: StudentRepository
 
 ) {
-    private var listaBadges: MutableList<Badge> = mutableListOf()
+
+    private var listaBadges = HashSet<Badge>()
     @GetMapping("/")
     fun index() : String{
         return "redirect:/teacher/badgesList";
     }
+
     //Mostra o formulário
     @GetMapping("/badgeform")
     fun sendForm(model : ModelMap, principal: Principal):String{
@@ -60,8 +68,23 @@ class TeacherController(
 
         model["badge"] = badge
         print("ESTE" + badge)
+        val estudantes = HashSet(badge.students)
+        model["estudantes"] = estudantes
+        print("tamanho" + badge.students.size)
+
+        var  dateTime = LocalDateTime.now()
+        var currentDate = dateTime.format(DateTimeFormatter.ofPattern("d/M/y"))
+        model["data"] = currentDate
+        print("DATATATATA ${currentDate}")
 
         return "badgeDetail"
+    }
+
+    @GetMapping("/tabela")
+    fun tabela(model: ModelMap): String{
+        val badge = badgeRepository.findByIdOrNull(216)?:throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        model["estudantes"] = badge.students
+        return "tabela"
     }
 
     @PostMapping("/badgeform")
@@ -101,11 +124,17 @@ class TeacherController(
 
     @GetMapping("/detailBadge")
     @ResponseBody
-    fun detailBadge(id: Long): Optional<Badge> {
+    fun detailBadge(id: Long, model : ModelMap): Optional<Badge> {
 
          //   model["badges"] = badgeRepository.findById(badge.id)
         /*model["badge"] = badgeRepository.findById(badge.id)
         return "badgeDetail"*/
+
+
+        var badge = badgeRepository.findByIdOrNull(id)?:throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        model["estudantes"] = badge.students
+
+        print("tamanho" + badge.students.size)
         return badgeRepository.findById(id)
     }
 
@@ -113,15 +142,17 @@ class TeacherController(
     fun listOfBadges( model : ModelMap ,principal: Principal):String{
 
         val professor = teacherRepository.findByName(principal.name)
+        model["professor"] = teacherRepository.findByName(principal.name)
+
         if (professor != null) {
             val listOfBadges =  badgeRepository.findByTeacher(professor)
             model["badges"] = listOfBadges ?: emptyArray<Badge>()
 
         }
         return "listOfBadges"
-    }
+}
 
-    @GetMapping("/sendBadge")
+    @GetMapping("/badgeSend")
     fun sendBadge(model: ModelMap, principal: Principal): String{
         model["sendBadgeForm"] = SendForm()
         val professor = teacherRepository.findByName(principal.name)
@@ -130,36 +161,48 @@ class TeacherController(
             model["badges"] = listOfBadges ?: emptyArray<Badge>()
         }
 
-        return "sendBadge"
+        return "badgeSend"
     }
-    @PostMapping("/sendBadge")
+    @PostMapping("/badgeSend")
     fun processSendForm(@Valid @ModelAttribute("sendBadgeForm")sendForm: SendForm,
-                    bindingResult: BindingResult) : String{
+                    bindingResult: BindingResult, principal: Principal, model: ModelMap) : String{
 
         if(bindingResult.hasErrors()){
-            return "sendBadge"
+            val professor = teacherRepository.findByName(principal.name)
+            if(professor != null) {
+                val listOfBadges = badgeRepository.findByTeacher(professor)
+                model["badges"] = listOfBadges ?: emptyArray<Badge>()
+            }
+            return "badgeSend"
         }
 
-        var badge = sendForm.badge?.name
+        var badge = sendForm.badge
 
         var badgeGanho = badgeRepository.findByName(badge!!)
-        var alunos = sendForm.alunos?.split(",")
+        var alunos = sendForm.alunos?.split(", ")
 
         for(a in alunos!!){
-            var aluno = pt.ulusofona.badges.dao.Student(
+            /*var aluno = pt.ulusofona.badges.dao.Student(
                     name = a
-            )
-           listaBadges.add(badgeGanho!!)
-            aluno.badges = listaBadges
+            )*/
 
-
+            var nomeAluno = a
+            var aluno = studentRepository.findByName(nomeAluno)
+            listaBadges.add(badgeGanho!!)
+            aluno!!.badges = listaBadges.toHashSet()
             studentRepository.save(aluno)
+
         }
 
-        return "sended"
+        model["tabela_studentbadge"] =HashSet(badgeGanho!!.students)
+        var  dateTime = LocalDateTime.now()
+        var currentDate = dateTime.format(DateTimeFormatter.ofPattern("d/M/y"))
+
+        model["data"] = currentDate
+
+        return "redirect:/teacher/detailBadge/${badgeGanho.id}"
+
     }
-
-
 
 /*
     @GetMapping("/listofstudents")
@@ -167,11 +210,6 @@ class TeacherController(
         return "listofstudents"
     }
 */
-
-
-
-
-
 
 }
 

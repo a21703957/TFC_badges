@@ -7,5 +7,5 @@ data class SendForm(
         @field:NotEmpty(message = "Alunos Obrigatório")
         var alunos : String? = null,
         @field:NotEmpty(message = "Nome Badge Origatório")
-        var badge : Badge? = null
+        var badge : String? = null
 )

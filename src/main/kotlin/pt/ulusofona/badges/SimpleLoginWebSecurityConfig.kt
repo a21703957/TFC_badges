@@ -70,7 +70,10 @@ class SimpleLoginWebSecurityConfig: BadgesSecurityConfig() {
             LOG.info("Didn't find users.csv file. Will create default users.")
 
             usersList.add(User.withUsername("student1").password("{noop}123").roles("STUDENT").build())
+            usersList.add(User.withUsername("student2").password("{noop}123").roles("STUDENT").build())
             usersList.add(User.withUsername("teacher1").password("{noop}123").roles("TEACHER").build())
+            usersList.add(User.withUsername("teacher2").password("{noop}123").roles("TEACHER").build())
+            usersList.add(User.withUsername("teacher3").password("{noop}123").roles("TEACHER").build())
             usersList.add(User.withUsername("admin").password("{noop}123").roles("TEACHER", "BADGES_ADMIN").build())
         }
 

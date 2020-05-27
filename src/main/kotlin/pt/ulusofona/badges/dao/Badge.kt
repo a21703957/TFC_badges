@@ -64,7 +64,7 @@ data class Badge (
         lateinit var teacher: Teacher
 
         @ManyToMany(mappedBy = "badges")
-        var students: List<Student> = mutableListOf<Student>()
+        var students: Set<Student> = HashSet<Student>()
 
 }
 

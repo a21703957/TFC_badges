@@ -24,7 +24,7 @@
     <br>
     <br>
     <h3 style="text-align: center;  margin-top: 25px">Os Meus Badges</h3>
-    <tr th:if="${badges.size() == 0}">
+    <tr th:if="${badges.size() == 0 or badges == null} ">
         <td colspan="2"> Sem Badges</td>
         <p th:text=" 'Número de Badges: ' + ${badges.size()}"></p>
     </tr>

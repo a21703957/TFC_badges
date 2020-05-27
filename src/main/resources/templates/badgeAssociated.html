@@ -15,8 +15,14 @@
             <table  id="customerTable" class="table">
                 <thead>
                 <tr>
-                    <th>Data</th>
+
                     <th>Nº Aluno</th>
+                    <th>Data</th>
+                </tr>
+                <tr th:each="estudante : ${tabela_studentbadge}">
+
+                    <td th:text="${estudante?.name}">nome</td>
+                    <td th:text="${data}"></td>
                 </tr>
                 </thead>
                 <tbody>

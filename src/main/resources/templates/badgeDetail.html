@@ -3,22 +3,74 @@
 <head th:replace="layouts/layout :: head (title = 'Badge Submetido')">
 
 </head>
+
+<style>
+    figure{
+        display: inline-flex;
+    }
+    figure img{
+        horiz-align: center;
+
+    }
+    figure figcaption{
+
+        text-align: left;
+    }
+</style>
 <body>
 <div th:replace="layouts/layout :: menu"> </div>
 <br>
 <br>
-<h1>Detalhe</h1>
+<h2 style="text-align: center;  margin-top: 25px">Detalhes Badge</h2>
 <br>
-<!--/*@thymesVar id="badge" type="pt.ulusofona.badges.dao.Badge"*/-->
-<div>
-    <!--/*@thymesVar id="badgy" type="pt.ulusofona.badges.dao.Badge"*/-->
+
+<div style="margin-left: 30px">
 
     <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-    <p th:text=" 'Nome: ' + ${badge.name}"></p>
-    <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-    <p th:text=" 'Descrição: ' + ${badge.description}"></p>
-    <p th:text=" 'Como Ganhar: ' + ${badge.toWin}"></p>
+    <figure>
+        <img  th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="270" height="270"/>
+        <figcaption >
+            <p th:text=" 'Nome: ' + ${badge.name}"></p>
+            <div class="row">
+                <div style="margin-left: 30px">
+                    <div class="row"><p>Curso: </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
+                    <div class="row"><p>Curso: </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
+                </div>
+            </div>
+            <p th:text=" 'Ano Curricular: ' + ${badge.year}"></p>
+            <p th:text="'Elemento de Avaliação: ' + ${badge.avaliation}"></p>
+            <p th:text="'Categoria: ' + ${badge.category} + ' skills'"></p>
+            <p th:text=" 'Validação: ' + ${badge.validacao}"></p>
+            <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+            <p th:text=" 'Descrição: ' + ${badge.description}"></p>
+            <p th:text=" 'Como Ganhar: ' + ${badge.toWin}"></p>
+        </figcaption>
+    </figure>
+    <br>
+    <h4 style="text-align: center;  margin-top: 25px">Alunos Associados ao Badge</h4>
+    <br>
+    <div style=" margin: 0 auto;  " class="row col-md-3 table-responsive">
+        <table  id="customerTable" class="table">
+            <thead>
+            <tr>
+                <th>Nº Aluno</th>
+                <th>Data</th>
+            </tr>
+            <tr th:each="estudante : ${estudantes}">
+
+                <td th:text="${estudante?.name}">nome</td>
+                <td th:text="${data}"></td>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
+
 
 <!--    <img src="./img/logo.png">-->
 
