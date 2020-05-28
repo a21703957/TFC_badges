@@ -184,10 +184,12 @@ class TeacherController(
 
             var nomeAluno = a
             var aluno = studentRepository.findByName(nomeAluno)
+            if(aluno == null){
+                aluno = pt.ulusofona.badges.dao.Student( name =  nomeAluno)
+            }
             listaBadges.add(badgeGanho!!)
             aluno!!.badges = listaBadges.toHashSet()
             studentRepository.save(aluno)
-
         }
 
         model["tabela_studentbadge"] =HashSet(badgeGanho!!.students)
