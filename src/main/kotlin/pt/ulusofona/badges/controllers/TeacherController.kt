@@ -80,12 +80,7 @@ class TeacherController(
         return "badgeDetail"
     }
 
-    @GetMapping("/tabela")
-    fun tabela(model: ModelMap): String{
-        val badge = badgeRepository.findByIdOrNull(216)?:throw ResponseStatusException(HttpStatus.NOT_FOUND)
-        model["estudantes"] = badge.students
-        return "tabela"
-    }
+
 
     @PostMapping("/badgeform")
     fun processForm(@Valid @ModelAttribute("badgeForm")badgeForm: BadgeForm,
@@ -133,6 +128,7 @@ class TeacherController(
 
         var badge = badgeRepository.findByIdOrNull(id)?:throw ResponseStatusException(HttpStatus.NOT_FOUND)
         model["estudantes"] = badge.students
+       // model["data"] completar
 
         print("tamanho" + badge.students.size)
         return badgeRepository.findById(id)
