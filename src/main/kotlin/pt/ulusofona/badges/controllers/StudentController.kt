@@ -11,8 +11,8 @@ import java.security.Principal
 import org.springframework.web.bind.annotation.PathVariable
 import java.util.*
 import org.springframework.ui.Model
-
-
+import kotlin.collections.HashSet
+import kotlin.collections.ArrayList
 
 
 @Controller
@@ -20,7 +20,9 @@ import org.springframework.ui.Model
 class StudentController(
         val studentRepository: StudentRepository,
         val badgeRepository: BadgeRepository
+
 ) {
+    private var badgesDisponiveis = HashSet<Badge>()
     @GetMapping("/")
     fun index() : String{
         return "redirect:/student/allBadges";
@@ -28,7 +30,8 @@ class StudentController(
 
     @GetMapping("/allBadges")
     fun listofAllBadges(model : ModelMap, principal: Principal): String{
-        model["badges"] = badgeRepository.findAll()
+        var badges = badgeRepository.findAll()
+        model["badges"] = badges
         var student = studentRepository.findByName(principal.name)
 
         if(student==null) {
@@ -37,6 +40,23 @@ class StudentController(
             )
             studentRepository.save(student)
         }
+
+        var myBadges = student.badges
+        model["myBadges"] = myBadges
+
+
+        for(mybadge in myBadges){
+            for (badge in badges){
+                if((badge.equals(mybadge))){
+                    badgesDisponiveis.add(badge)
+                }
+
+            }
+        }
+
+        print("disonive " + badgesDisponiveis.size)
+
+        model["badgesDisponiveis"] = badgesDisponiveis
 
         print("Badegs aluno " + student.badges.size)
 

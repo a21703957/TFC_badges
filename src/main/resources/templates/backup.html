@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts/layout :: head (title = 'Home Professor')">
@@ -46,7 +47,7 @@
                         </tr>
                         <h4 style="margin-left: 30px" th:text=" 'Badges Disponíveis: ' + ${badges.size()}"></h4>
                         <tr th:each="badge : ${badges}">
-                            <!--        <td><span th:text="${badge.name}">Nome: </span></td>-->
+                            &lt;!&ndash;        <td><span th:text="${badge.name}">Nome: </span></td>&ndash;&gt;
                             <figure>
                                 <img th:src=" @{/img/badgeBW.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
                                 <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
@@ -54,7 +55,7 @@
                         </tr>
                         <h4 style="margin-left: 30px" th:text=" 'Os meus Badges: ' + ${myBadges.size()}"></h4>
                         <tr th:each="myBadge : ${myBadges}">
-                            <!--        <td><span th:text="${badge.name}">Nome: </span></td>-->
+                            &lt;!&ndash;        <td><span th:text="${badge.name}">Nome: </span></td>&ndash;&gt;
                             <figure>
                                 <img th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
                                 <figcaption ><span th:text="${myBadge.name}">Nome: </span></figcaption>
@@ -98,3 +99,4 @@
 
 </body>
 </html>
+-->

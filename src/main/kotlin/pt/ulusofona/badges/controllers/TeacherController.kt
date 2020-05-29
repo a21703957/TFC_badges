@@ -177,6 +177,7 @@ class TeacherController(
         var badgeGanho = badgeRepository.findByName(badge!!)
         var alunos = sendForm.alunos?.split(", ")
 
+
         for(a in alunos!!){
             /*var aluno = pt.ulusofona.badges.dao.Student(
                     name = a
