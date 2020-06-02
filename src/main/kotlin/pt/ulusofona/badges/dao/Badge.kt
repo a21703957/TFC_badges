@@ -1,6 +1,7 @@
 package pt.ulusofona.badges.dao
 
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 enum class Validacao {
         Externa, Interna
@@ -55,7 +56,10 @@ data class Badge (
         var toWin : String? = null,
 
         @Column(nullable = false)
-        var validacao: Validacao = Validacao.Externa
+        var validacao: Validacao = Validacao.Externa,
+
+        @Transient
+        var assign : Boolean = false
 
 
 ){

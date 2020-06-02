@@ -30,20 +30,20 @@
     <figure>
         <img  th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="270" height="270"/>
         <figcaption >
-            <p th:text=" 'Nome: ' + ${badge.name}"></p>
             <div class="row">
                 <div style="margin-left: 30px">
-                    <div class="row"><p>Curso: </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
-                    <div class="row"><p>Curso: </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
+                    <div class="row"><p><b>Nome:&nbsp;</b></p><p th:text="${badge.name}"></p></div>
+                    <div class="row"><p><b>Curso:&nbsp;</b> </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
+                    <div class="row"><p><b>Ano Curricular:&nbsp;</b> </p><p th:text="${badge.year}"></p></div>
+                    <div class="row"><p><b>Elemento de Avaliação:&nbsp;</b></p><p th:text=" ${badge.avaliation}"></p></div>
+                    <div class="row"><p><b>Categoria:&nbsp;</b></p> <p th:text=" ${badge.category} + ' skills'"></p></div>
+                    <div class="row"><p><b>Validação:&nbsp;</b></p> <p th:text="${badge.validacao}"></p></div>
+                    <div class="row"><p><b>Descrição:&nbsp;</b></p><p th:text="  ${badge.description}"></p></div>
+                    <div class="row"><p><b>Como Ganhar:&nbsp;</b></p>  <p th:text="${badge.toWin}"></p></div>
                 </div>
             </div>
-            <p th:text=" 'Ano Curricular: ' + ${badge.year}"></p>
-            <p th:text="'Elemento de Avaliação: ' + ${badge.avaliation}"></p>
-            <p th:text="'Categoria: ' + ${badge.category} + ' skills'"></p>
-            <p th:text=" 'Validação: ' + ${badge.validacao}"></p>
             <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
-            <p th:text=" 'Descrição: ' + ${badge.description}"></p>
-            <p th:text=" 'Como Ganhar: ' + ${badge.toWin}"></p>
+
         </figcaption>
     </figure>
     <br>

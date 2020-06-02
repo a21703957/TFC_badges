@@ -48,53 +48,85 @@
                         <h4 style="margin-left: 30px" th:text=" 'Badges Disponíveis: ' + ${badges.size()}"></h4>
                         <tr th:each="badge : ${badges}">
                             &lt;!&ndash;        <td><span th:text="${badge.name}">Nome: </span></td>&ndash;&gt;
-                            <figure>
+                            <div class="row">
+                                <div class="column">
+                                    <div th:switch="${badge.assign}">
+                                        <p th:case="${true}">
+                                            <figure>
+                                                <img th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
+                                                <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
+                                            </figure>
+                                        </p>
+                                        <p th:case="*">
+                                            <figure>
+                                                <img th:src=" @{/img/badgeBW.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
+                                                <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
+                                            </figure>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            &lt;!&ndash;<div th:if="${badge.assign} == true">
+                                <figure>
+                                    <img th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
+                                    <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
+                                </figure>
+                            </div>
+                            <div th:unless="${badge.assign} == false">
+                                <figure>
+                                    <img th:src=" @{/img/badgeBW.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
+                                    <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
+                                </figure>
+                            </div>&ndash;&gt;
+                            &lt;!&ndash;<figure>
                                 <img th:src=" @{/img/badgeBW.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
                                 <figcaption ><span th:text="${badge.name}">Nome: </span></figcaption>
-                            </figure>
-                        </tr>
-                        <h4 style="margin-left: 30px" th:text=" 'Os meus Badges: ' + ${myBadges.size()}"></h4>
-                        <tr th:each="myBadge : ${myBadges}">
-                            &lt;!&ndash;        <td><span th:text="${badge.name}">Nome: </span></td>&ndash;&gt;
-                            <figure>
-                                <img th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
-                                <figcaption ><span th:text="${myBadge.name}">Nome: </span></figcaption>
-                            </figure>
-                        </tr>
-                    </div>
-                    <div class="tab-pane" id="tab2"></div>
+                            </figure>&ndash;&gt;
+                            &lt;!&ndash;</tr>
+                            <h4 style="margin-left: 30px" th:text=" 'Os meus Badges: ' + ${badges.size()}"></h4>
+                            <tr th:each="myBadge : ${badges}">
+                                &lt;!&ndash;        <td><span th:text="${badge.name}">Nome: </span></td>&ndash;&gt;
+                                <figure>
+                                    <img th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="200" height="200"/>
+                                    <figcaption ><span th:text="${myBadge.name}">Nome: </span></figcaption>
+                                </figure>
+                            </tr>
+                        </div>&ndash;&gt;
+                            <div class="tab-pane" id="tab2"></div>
 
+                    </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
 
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script>
+            $('#myTabs a').click(function (e) {
+                e.preventDefault();
 
-    <script>
-        $('#myTabs a').click(function (e) {
-            e.preventDefault();
+                var url = $(this).attr("data-url");
+                var href = this.hash;
+                var pane = $(this);
 
-            var url = $(this).attr("data-url");
-            var href = this.hash;
-            var pane = $(this);
-
-            // ajax load from data-url
-            $(href).load(url, function (result) {
-                pane.tab('show');
+                // ajax load from data-url
+                $(href).load(url, function (result) {
+                    pane.tab('show');
+                });
             });
-        });
 
-        // load first tab content
-        $('#tab1').load($('.nav-link.active').attr("data-url"), function (result) {
-        });
-    </script>
+            // load first tab content
+            $('#tab1').load($('.nav-link.active').attr("data-url"), function (result) {
+            });
+        </script>
 
-</div>
+    </div>
 
 
 </body>

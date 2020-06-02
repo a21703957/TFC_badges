@@ -114,7 +114,7 @@ class TeacherController(
         badgeDao.teacher = teacher
         badgeRepository.save(badgeDao)
 
-        return "badgecreated"
+        return "redirect:/teacher/detailBadge/${badgeDao.id}"
     }
 
     @GetMapping("/detailBadge")
@@ -175,7 +175,7 @@ class TeacherController(
         var badge = sendForm.badge
 
         var badgeGanho = badgeRepository.findByName(badge!!)
-        var alunos = sendForm.alunos?.split(", ")
+        var alunos = sendForm.alunos?.split(",")
 
 
         for(a in alunos!!){
@@ -183,7 +183,8 @@ class TeacherController(
                     name = a
             )*/
 
-            var nomeAluno = a
+            var nomeAluno = a.trim()
+
             var aluno = studentRepository.findByName(nomeAluno)
             if(aluno == null){
                 aluno = pt.ulusofona.badges.dao.Student( name =  nomeAluno)

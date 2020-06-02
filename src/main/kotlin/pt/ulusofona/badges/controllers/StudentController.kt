@@ -31,7 +31,7 @@ class StudentController(
     @GetMapping("/allBadges")
     fun listofAllBadges(model : ModelMap, principal: Principal): String{
         var badges = badgeRepository.findAll()
-        model["badges"] = badges
+
         var student = studentRepository.findByName(principal.name)
 
         if(student==null) {
@@ -41,24 +41,36 @@ class StudentController(
             studentRepository.save(student)
         }
 
+
+
         var myBadges = student.badges
-        model["myBadges"] = myBadges
 
+        for(badge in badges){
+            for(b in myBadges){
+                if(badge.equals(b)){
+                    badge.assign = true
+                }
+            }
+        }
 
-        for(mybadge in myBadges){
-            for (badge in badges){
-                if((badge.equals(mybadge))){
+        for(badge in badges){
+            for (mybadge in myBadges){
+                if(!((badge.name).equals(mybadge.name))){
                     badgesDisponiveis.add(badge)
                 }
 
             }
         }
+        model["badges"] = badges
+        model["mybadges"] = myBadges
 
         print("disonive " + badgesDisponiveis.size)
 
         model["badgesDisponiveis"] = badgesDisponiveis
 
         print("Badegs aluno " + student.badges.size)
+
+
 
         return "index"
     }
