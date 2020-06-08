@@ -63,12 +63,17 @@ data class Badge (
 
 
 ){
-
         @ManyToOne
         lateinit var teacher: Teacher
 
+        @OneToMany
+        @JoinColumn(name="badge_id")
+        var studentBadges:  Set<StudentBadge> = HashSet()
+/*
         @ManyToMany(mappedBy = "badges")
-        var students: Set<Student> = HashSet<Student>()
+        var students: Set<Student> = HashSet<Student>()*/
+
+
 
 }
 

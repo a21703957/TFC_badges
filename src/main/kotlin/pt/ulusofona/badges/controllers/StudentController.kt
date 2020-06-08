@@ -11,6 +11,7 @@ import java.security.Principal
 import org.springframework.web.bind.annotation.PathVariable
 import java.util.*
 import org.springframework.ui.Model
+import pt.ulusofona.badges.repositories.StudentBadgeRepository
 import kotlin.collections.HashSet
 import kotlin.collections.ArrayList
 
@@ -19,7 +20,8 @@ import kotlin.collections.ArrayList
 @RequestMapping("/student")
 class StudentController(
         val studentRepository: StudentRepository,
-        val badgeRepository: BadgeRepository
+        val badgeRepository: BadgeRepository,
+        val studentBadgeRepository : StudentBadgeRepository
 
 ) {
     private var badgesDisponiveis = HashSet<Badge>()
@@ -43,22 +45,27 @@ class StudentController(
 
 
 
-        var myBadges = student.badges
+        var myBadges = studentBadgeRepository.findByStudent(student)
+
 
         for(badge in badges){
-            for(b in myBadges){
-                if(badge.equals(b)){
-                    badge.assign = true
+            if (myBadges != null) {
+                for(b in myBadges){
+                    if(badge.equals(b)){
+                        badge.assign = true
+                    }
                 }
             }
         }
 
         for(badge in badges){
-            for (mybadge in myBadges){
-                if(!((badge.name).equals(mybadge.name))){
-                    badgesDisponiveis.add(badge)
-                }
+            if (myBadges != null) {
+                for (mybadge in myBadges){
+                    if(!((badge.name).equals(mybadge.name))){
+                        badgesDisponiveis.add(badge)
+                    }
 
+                }
             }
         }
         model["badges"] = badges
@@ -68,7 +75,7 @@ class StudentController(
 
         model["badgesDisponiveis"] = badgesDisponiveis
 
-        print("Badegs aluno " + student.badges.size)
+       // print("Badegs aluno " + student.studentBadges)
 
 
 
