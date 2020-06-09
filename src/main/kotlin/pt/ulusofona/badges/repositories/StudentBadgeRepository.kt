@@ -8,4 +8,5 @@ interface StudentBadgeRepository: JpaRepository<StudentBadge, Long> {
     fun findByStudentId(studentId: Long): List<StudentBadge>?
     fun findByBadgeId(badgeId: Long) : List<StudentBadge>?
 
+
 }
