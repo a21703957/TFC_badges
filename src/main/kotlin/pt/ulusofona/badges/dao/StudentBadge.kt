@@ -9,16 +9,8 @@ data class StudentBadge (
         @GeneratedValue
         var id : Long = 0,
         @Column
-        var data : String ? = null
-){
+        var data : String ? = null,
 
-    @ManyToOne
-    @JoinColumn(name="student_id", insertable = false, updatable = false)
-    lateinit var student: Student
-
-    @ManyToOne
-    @JoinColumn(name="badge_id", insertable = false, updatable = false)
-    lateinit var badge : Badge
-
-
-}
+        var studentId: Long = 0,
+        var badgeId: Long = 0
+)

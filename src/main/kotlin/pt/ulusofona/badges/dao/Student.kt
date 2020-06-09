@@ -12,18 +12,5 @@ data class Student(
         var name : String? = null
 
 ) {
-  /*  @ManyToMany(cascade = arrayOf(CascadeType.MERGE ))
-        @JoinTable(name = "student_badge",
-                joinColumns = arrayOf(JoinColumn(name = "student_id", referencedColumnName = "id")),
-                inverseJoinColumns = arrayOf(JoinColumn(name = "badge_id", referencedColumnName = "id")))*/
-
-    @OneToMany
-    @JoinColumn(name="student_id")
-    var studentBadges: Set<StudentBadge>  = HashSet<StudentBadge>()
-
-
-
-
-
 
 }

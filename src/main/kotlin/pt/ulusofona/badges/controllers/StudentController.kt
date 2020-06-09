@@ -45,8 +45,9 @@ class StudentController(
 
 
 
-        var myBadges = studentBadgeRepository.findByStudent(student)
-
+        var myBadges = studentBadgeRepository.findByStudentId(student.id)?.map {
+            badgeRepository.getOne(it.badgeId)
+        }
 
         for(badge in badges){
             if (myBadges != null) {

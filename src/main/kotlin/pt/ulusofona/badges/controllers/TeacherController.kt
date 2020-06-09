@@ -61,12 +61,14 @@ class TeacherController(
 
     @GetMapping(value = ["/detailBadge/{badgeId}"])
     fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest): String{
-        val b = studentBadgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
+        val b = badgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
-        model["badge"] = b.badge
-        print("ESTE" + b.badge)
-        val estudantes = studentBadgeRepository.findByBadge(b.badge)
+        model["badge"] = b
+        print("ESTE" + b)
+        val estudantes = studentBadgeRepository.findByBadgeId(b.id)?.map {
+            studentRepository.getOne(it.studentId)
+        }
 
         model["estudantes"] = estudantes
         print("tamanho" + estudantes!!.size)
@@ -114,23 +116,25 @@ class TeacherController(
         return "redirect:/teacher/detailBadge/${badgeDao.id}"
     }
 
-    @GetMapping("/detailBadge")
-    @ResponseBody
-    fun detailBadge(id: Long, model : ModelMap): Optional<Badge> {
-
-         //   model["badges"] = badgeRepository.findById(badge.id)
-        /*model["badge"] = badgeRepository.findById(badge.id)
-        return "badgeDetail"*/
-
-
-        var badge = badgeRepository.findByIdOrNull(id)?:throw ResponseStatusException(HttpStatus.NOT_FOUND)
-        var  students = badge.studentBadges
-        model["estudantes"] = students
-       // model["data"] completar
-
-        print("tamanho" + badge.studentBadges.size)
-        return badgeRepository.findById(id)
-    }
+//    @GetMapping("/detailBadge")
+//    @ResponseBody
+//    fun detailBadge(id: Long, model : ModelMap): Optional<Badge> {
+//
+//         //   model["badges"] = badgeRepository.findById(badge.id)
+//        /*model["badge"] = badgeRepository.findById(badge.id)
+//        return "badgeDetail"*/
+//
+//
+////        var badge = badgeRepository.findByIdOrNull(id)?:throw ResponseStatusException(HttpStatus.NOT_FOUND)
+////        var  students = badge.studentBadges
+////        model["estudantes"] = students
+////       // model["data"] completar
+////
+////        print("tamanho" + badge.studentBadges.size)
+////        return badgeRepository.findById(id)
+//
+//        return Optional.empty()
+//    }
 
     @GetMapping("/badgesList")
     fun listOfBadges( model : ModelMap ,principal: Principal):String{
@@ -170,7 +174,7 @@ class TeacherController(
             return "badgeSend"
         }
 
-        var  dateTime = LocalDateTime.now()
+        var dateTime = LocalDateTime.now()
         var currentDate = dateTime.format(DateTimeFormatter.ofPattern("d/M/y"))
 
         var badge = sendForm.badge
@@ -188,25 +192,29 @@ class TeacherController(
             var aluno = studentRepository.findByName(nomeAluno)
             if(aluno == null){
                 aluno = pt.ulusofona.badges.dao.Student( name =  nomeAluno)
+                studentRepository.save(aluno)
             }
 
             var studentBadge = StudentBadge()
-             studentBadge.data = currentDate
+            studentBadge.data = currentDate
             if (badgeGanho != null) {
-                studentBadge.badge = badgeGanho
+                studentBadge.badgeId = badgeGanho.id
             }
-            studentBadge.student = aluno
+            studentBadge.studentId = aluno.id
             if (badgeGanho != null) {
                 listaBadges.add(badgeGanho)
             }
 
             listaStudentBadge.add(studentBadge)
             studentBadgeRepository.save(studentBadge)
-            aluno!!.studentBadges = listaStudentBadge
-            studentRepository.save(aluno)
         }
 
-        model["tabela_studentbadge"] =HashSet(badgeGanho!!.studentBadges)
+        val studentBadges = studentBadgeRepository.findByBadgeId(badgeGanho!!.id)
+        val badges = studentBadges?.map {
+            badgeRepository.getOne(it.badgeId)
+        }?.distinct()
+
+        model["tabela_studentbadge"] = badges
 
 
         //model["data"] = currentDate
@@ -221,6 +229,20 @@ class TeacherController(
         return "listofstudents"
     }
 */
+
+//    @GetMapping("/test")
+//    fun test(model: ModelMap): String {
+
+//        val student = studentRepository.findByName("student1")
+//        val badge = badgeRepository.findByName("teste2")
+//
+//        val sb = StudentBadge(data = "bla")
+//        sb.student = student!!
+//        studentBadgeRepository.save(sb)
+//
+//
+//        return "redirect:/"
+//    }
 
 }
 
