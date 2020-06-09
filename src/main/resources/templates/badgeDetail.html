@@ -59,7 +59,7 @@
             <tr th:each="estudante : ${estudantes}">
 
                 <td th:text="${estudante?.name}">nome</td>
-                <td th:text="${data}"></td>
+                <td th:text="${estudante?.dateOfBadge}"></td>
             </tr>
             </thead>
             <tbody>

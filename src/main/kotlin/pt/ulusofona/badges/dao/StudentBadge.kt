@@ -11,6 +11,6 @@ data class StudentBadge (
         @Column
         var data : String ? = null,
 
-        var studentId: Long = 0,
-        var badgeId: Long = 0
+        var studentId: Long = 0,  // FK
+        var badgeId: Long = 0  // FK
 )

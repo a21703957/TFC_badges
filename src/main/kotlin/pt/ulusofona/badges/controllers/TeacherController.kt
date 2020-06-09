@@ -67,14 +67,16 @@ class TeacherController(
         model["badge"] = b
         print("ESTE" + b)
         val estudantes = studentBadgeRepository.findByBadgeId(b.id)?.map {
-            studentRepository.getOne(it.studentId)
+            val student = studentRepository.getOne(it.studentId)
+            student.dateOfBadge = it.data
+            student
         }
 
         model["estudantes"] = estudantes
         print("tamanho" + estudantes!!.size)
 
         //Mudar a variável quando tiver a tabela funcional
-        model["data"] = "05/05/2020"
+        // model["data"] = "05/05/2020"
 
         return "badgeDetail"
     }

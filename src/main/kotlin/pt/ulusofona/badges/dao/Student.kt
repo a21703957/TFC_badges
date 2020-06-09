@@ -9,7 +9,10 @@ data class Student(
         var id : Long = 0,
 
         @Column(nullable = false)
-        var name : String? = null
+        var name : String? = null,
+
+        @Transient
+        var dateOfBadge: String? = null
 
 ) {
 
