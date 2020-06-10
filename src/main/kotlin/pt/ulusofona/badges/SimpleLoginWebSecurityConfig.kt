@@ -15,7 +15,7 @@ import pt.ulusofona.badges.security.BadgesSecurityConfig
 import java.util.logging.Logger
 
 
-@Profile("!deisi")
+// @Profile("!deisi") TODO: remove this when there is integration with SSO
 @Configuration
 @EnableWebSecurity
 class SimpleLoginWebSecurityConfig: BadgesSecurityConfig() {
