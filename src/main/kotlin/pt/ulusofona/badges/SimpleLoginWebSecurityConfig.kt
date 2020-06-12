@@ -74,6 +74,7 @@ class SimpleLoginWebSecurityConfig: BadgesSecurityConfig() {
             usersList.add(User.withUsername("teacher1").password("{noop}123").roles("TEACHER").build())
             usersList.add(User.withUsername("teacher2").password("{noop}123").roles("TEACHER").build())
             usersList.add(User.withUsername("teacher3").password("{noop}123").roles("TEACHER").build())
+            usersList.add(User.withUsername("teacher4").password("{noop}123").roles("TEACHER").build())
             usersList.add(User.withUsername("admin").password("{noop}123").roles("TEACHER", "BADGES_ADMIN").build())
         }
 

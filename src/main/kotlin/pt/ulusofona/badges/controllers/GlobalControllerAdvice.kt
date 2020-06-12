@@ -42,6 +42,7 @@ class GlobalControllerAdvice {
                     userDetailsManager.userExists("teacher1") ||
                     userDetailsManager.userExists("teacher2") ||
                     userDetailsManager.userExists("teacher3") ||
+                    userDetailsManager.userExists("teacher4") ||
                     userDetailsManager.userExists("admin")
         } else {
             return false

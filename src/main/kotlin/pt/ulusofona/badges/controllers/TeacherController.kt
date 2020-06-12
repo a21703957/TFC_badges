@@ -62,11 +62,11 @@ class TeacherController(
     @GetMapping(value = ["/detailBadge/{badgeId}"])
     fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest): String{
 
-        val b = badgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        val badge = badgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
-        model["badge"] = b
-        print("ESTE" + b)
-        val estudantes = studentBadgeRepository.findByBadgeId(b.id)?.map {
+        model["badge"] = badge
+        print("ESTE" + badge)
+        val estudantes = studentBadgeRepository.findByBadgeId(badge.id)?.map {
             val student = studentRepository.getOne(it.studentId)
             student.dateOfBadge = it.data
             student
@@ -141,10 +141,16 @@ class TeacherController(
     @GetMapping("/badgesList")
     fun listOfBadges( model : ModelMap ,principal: Principal):String{
 
-        val professor = teacherRepository.findByName(principal.name)
+        var professor = teacherRepository.findByName(principal.name)
 
 
         if (professor != null) {
+            val listOfBadges =  badgeRepository.findByTeacher(professor)
+            model["badges"] = listOfBadges ?: emptyArray<Badge>()
+            model["professor"] = teacherRepository.findByName(principal.name)
+        }else{
+            professor = pt.ulusofona.badges.dao.Teacher(name = principal.name)
+            teacherRepository.save(professor)
             val listOfBadges =  badgeRepository.findByTeacher(professor)
             model["badges"] = listOfBadges ?: emptyArray<Badge>()
             model["professor"] = teacherRepository.findByName(principal.name)
