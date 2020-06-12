@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
+import kotlin.collections.HashSet
 
 
 @Controller
@@ -189,8 +190,13 @@ class TeacherController(
 
         var badgeGanho = badgeRepository.findByName(badge!!)
         var alunos = sendForm.alunos?.split(",")
+        var h = HashSet<String>()
+        for(aluno in alunos!!){
+          h.add(aluno)
+        }
 
-        for(a in alunos!!){
+
+        for(a in h){
             /*var aluno = pt.ulusofona.badges.dao.Student(
                     name = a
             )*/
