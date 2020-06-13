@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 import pt.ulusofona.badges.dao.Badge
+import pt.ulusofona.badges.dao.Student
 import pt.ulusofona.badges.dao.StudentBadge
 import pt.ulusofona.badges.forms.BadgeForm
 import pt.ulusofona.badges.forms.SendForm
@@ -18,7 +19,6 @@ import pt.ulusofona.badges.repositories.TeacherRepository
 import java.security.Principal
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 import kotlin.collections.HashSet
@@ -73,7 +73,14 @@ class TeacherController(
             student
         }
 
-        model["estudantes"] = estudantes
+        var estudanteMapa = HashSet<Student>()
+        if (estudantes != null) {
+            for (estudante in estudantes!!){
+                estudanteMapa.add(estudante)
+            }
+        }
+
+        model["estudantes"] = estudanteMapa
         print("tamanho" + estudantes!!.size)
 
         //Mudar a variável quando tiver a tabela funcional
