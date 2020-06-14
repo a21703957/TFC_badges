@@ -18,15 +18,25 @@
 
     }
 
+
+    h2{
+        font-family: Calibri;
+        font-weight: bolder;
+        color:gray();
+    }
+
+
 </style>
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
     <br>
     <br>
-    <h3 style="text-align: center;  margin-top: 25px">Os Meus Badges</h3>
+    <h2 style="text-align: center;  margin-top: 25px">Os Meus Badges</h2>
     <tr th:if="${badges.size() == 0 or badges == null} ">
-        <td colspan="2"> Sem Badges</td>
-        <p th:text=" 'Número de Badges: ' + ${badges.size()}"></p>
+        <div class="row" style="margin-left:30px">
+            <p th:text=" 'Número de Badges: ' + ${badges.size()}"></p>
+
+        </div>
     </tr>
     <tr th:each="badge : ${badges}">
         <!--       (id=${badge.id}) <td><span th:text="${badge.name}">Nome: </span></td>-->

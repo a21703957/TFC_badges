@@ -3,46 +3,55 @@
 <head th:replace="layouts/layout :: head (title = 'Home Professor')">
 
 </head>
+<style>
 
+    h2{
+        font-family: Calibri;
+
+    }
+
+</style>
 
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
-    <div class="container "  >
+    <div class="container" >
         <br>
         <br>
         <h2 style="text-align: center;  margin-top: 25px">Entregar Badge</h2>
-        <form method="post" th:action="@{/teacher/badgeSend}" th:object="${sendBadgeForm}" class ="needs-validation" novalidate >
-            <div class="form-group" th:classappend="${#fields.hasErrors('badge')} ? 'has-error' : ''">
-                <label for="badge" class="col-sm-3 control-label">Badge:</label>
-                <div class="col-sm-5">
-                    <select th:field="*{badge}" class="form-control" id="badge">
-                        <option th:each="badge : ${badges}"
-                          th:value="${badge.name}" th:text="${badge.name}" ></option>
-                    </select>
+        <br>
+        <br>
 
-                    <!--<input th:field="*{badge}" type="text" class="form-control" id="badge" placeholder="Nome do Badge" required=""/>
-                    <div class = "valid-feedback"></div>
-                    <div class = "invalid-feedback">Por favor, Insira o nome do Badge/div>
-                        <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('badge')}" th:errors="*{badge}">Error</p>
-                    </div>-->
+        <form  method="post" th:action="@{/teacher/badgeSend}" th:object="${sendBadgeForm}" class ="needs-validation" novalidate >
+            <div style="margin-left: 280px">
+                <div class="form-group" th:classappend="${#fields.hasErrors('badge')} ? 'has-error' : ''">
+                    <label for="badge" class="col-sm-3 control-label">Badge:</label>
+                    <div class="col-md-8" >
+                        <select th:field="*{badge}" class="form-control" id="badge">
+                            <option th:each="badge : ${badges}"
+                                    th:value="${badge.name}" th:text="${badge.name}" ></option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" th:classappend="${#fields.hasErrors('alunos')} ? 'has-error' : ''">
-                <label for="alunos" class="col-sm-3 control-label">Alunos:</label>
-                <div class="col-sm-5">
-                    <input th:field="*{alunos}" type="text" class="form-control" id="alunos" placeholder="aluno1,aluno2,aluno3 " required=""/>
-                    <div class = "valid-feedback"></div>
-                    <div class = "invalid-feedback">Por favor, Insira o/os número/os do/os aluno/os</div>
-                    <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('alunos')}" th:errors="*{alunos}">Error</p>
-                    <small id="CategoryHelpBlock" class="form-text text-muted">
-                        Número dos alunos separados por "," (vírgula)
-                    </small>
+                <div class="form-group" th:classappend="${#fields.hasErrors('alunos')} ? 'has-error' : ''">
+                    <label for="alunos" class="col-sm-3 control-label">Alunos:</label>
+                    <div class="col-md-8">
+                        <input th:field="*{alunos}" type="text" class="form-control" id="alunos" placeholder="aluno1,aluno2,aluno3 " required=""/>
+                        <div class = "valid-feedback"></div>
+                        <div class = "invalid-feedback">Por favor, Insira o/os número/os do/os aluno/os</div>
+                        <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('alunos')}" th:errors="*{alunos}">Error</p>
+                        <small id="CategoryHelpBlock" class="form-text text-muted">
+                            Número dos alunos separados por "," (vírgula)
+                        </small>
+                    </div>
+
                 </div>
 
             </div>
+            <br>
+
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Submeter</button> <button type="reset" class="btn btn-primary">Repor</button>
+                <button type="submit" class="btn btn-success">Submeter</button> <button type="reset" class="btn btn-primary">Repor</button>
             </div>
 
         </form>

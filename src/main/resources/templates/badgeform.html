@@ -3,6 +3,11 @@
 <head th:replace="layouts/layout :: head (title = 'Criar Badge')">
 
 </head>
+<style>
+
+
+</style>
+
 <body>
     <div th:replace="layouts/layout :: menu"> </div>
 
@@ -21,7 +26,7 @@
                     <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Nome do Badge" required=""/>
                     <div class = "valid-feedback"></div>
                     <div class = "invalid-feedback">Por favor, Insira o Nome para o Badge</div>
-                    <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</p>
+                    <p class="help-block invalid-fedback" th:if="${#fields.hasErrors('name') }" th:errors="*{name}">Error</p>
                 </div>
             </div>
            <!-- <div class="form-group " >

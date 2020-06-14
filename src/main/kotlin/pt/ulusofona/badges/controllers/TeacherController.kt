@@ -100,6 +100,8 @@ class TeacherController(
         }
         println("user em sessão: ${principal.name}")
 
+
+
         val badgeDao = pt.ulusofona.badges.dao.Badge(
                 name = badgeForm.name,
 //                subject = badgeForm.subject!!,
@@ -119,6 +121,8 @@ class TeacherController(
             )
             teacherRepository.save(teacher)
         }
+
+
 
         badgeDao.teacher = teacher
         badgeRepository.save(badgeDao)

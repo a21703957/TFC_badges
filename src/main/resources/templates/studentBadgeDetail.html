@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head th:replace="layouts/layout :: head (title = 'Badge Submetido')">
+
+        </head>
+
+        <style>
+            figure{
+                display: inline-flex;
+            }
+            figure img{
+                horiz-align: center;
+
+            }
+            figure figcaption{
+
+                text-align: left;
+            }
+        </style>
+<body>
+<div th:replace="layouts/layout :: menu"> </div>
+<br>
+<br>
+<h2 style="text-align: center;  margin-top: 25px">Detalhes Badge</h2>
+<br>
+<br>
+<br>
+
+<div style="margin-left: 450px">
+
+    <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+    <figure>
+        <img  th:src=" @{/img/badge.png} "  class="rounded float-left" alt="polyglota" width="270" height="270"/>
+        <figcaption >
+            <div class="row">
+                <div style="margin-left: 30px">
+                    <div class="row"><p><b>Nome:&nbsp;</b></p><p th:text="${badge.name}"></p></div>
+                    <div class="row"><p><b>Curso:&nbsp;</b> </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
+                    <div class="row"><p><b>Ano Curricular:&nbsp;</b> </p><p th:text="${badge.year}"></p></div>
+                    <div class="row"><p><b>Elemento de Avaliação:&nbsp;</b></p><p th:text=" ${badge.avaliation}"></p></div>
+                    <div class="row"><p><b>Categoria:&nbsp;</b></p> <p th:text=" ${badge.category} + ' skills'"></p></div>
+                    <div class="row"><p><b>Validação:&nbsp;</b></p> <p th:text="${badge.validacao}"></p></div>
+                    <div class="row"><p><b>Descrição:&nbsp;</b></p><p th:text="  ${badge.description}"></p></div>
+                    <div class="row"><p><b>Como Ganhar:&nbsp;</b></p>  <p th:text="${badge.toWin}"></p></div>
+                </div>
+            </div>
+            <!--/*@thymesVar id="badgeForm" type="pt.ulusofona.badges.forms.BadgeForm"*/-->
+
+        </figcaption>
+    </figure>
+ </div>
+
+
+<!--    <img src="./img/logo.png">-->
+
+
+</body>
+</html>
