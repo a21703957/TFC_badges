@@ -32,6 +32,7 @@
         <figcaption >
             <div class="row">
                 <div style="margin-left: 30px">
+                    <div class="row"><p><b>Docente:&nbsp;</b></p><p th:text="${username}"></p></div>
                     <div class="row"><p><b>Nome:&nbsp;</b></p><p th:text="${badge.name}"></p></div>
                     <div class="row"><p><b>Curso:&nbsp;</b> </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
                     <div class="row"><p><b>Ano Curricular:&nbsp;</b> </p><p th:text="${badge.year}"></p></div>

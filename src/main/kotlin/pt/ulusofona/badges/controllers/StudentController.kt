@@ -146,7 +146,7 @@ class StudentController(
 
 
     @GetMapping(value = ["/badgeDetail/{badgeId}"])
-    fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest): String{
+    fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest, principal: Principal): String{
 
         val badge = badgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 

@@ -61,7 +61,7 @@ class TeacherController(
     }*/
 
     @GetMapping(value = ["/detailBadge/{badgeId}"])
-    fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest): String{
+    fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest, principal:Principal): String{
 
         val badge = badgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
@@ -100,34 +100,39 @@ class TeacherController(
         }
         println("user em sessão: ${principal.name}")
 
+        var badgeRepetido = badgeRepository.findByName(badgeForm.name)
 
-
-        val badgeDao = pt.ulusofona.badges.dao.Badge(
-                name = badgeForm.name,
+        if(badgeRepetido == null){
+            val badgeDao = pt.ulusofona.badges.dao.Badge(
+                    name = badgeForm.name,
 //                subject = badgeForm.subject!!,
-                year = badgeForm.year!!,
-                LEI = badgeForm.LEI,
-                LEIRT =  badgeForm.LEIRT,
-                LIG = badgeForm.LIG,
-                avaliation = badgeForm.avaliation!!,
-                category = badgeForm.category!!,
-                description = badgeForm.description,
-                toWin = badgeForm.toWin,
-                validacao = badgeForm.validacao!!)
-        var teacher = teacherRepository.findByName(principal.name)
-        if(teacher==null) {
-            teacher = pt.ulusofona.badges.dao.Teacher(
-                    name = principal.name
-            )
-            teacherRepository.save(teacher)
+                    year = badgeForm.year!!,
+                    LEI = badgeForm.LEI,
+                    LEIRT =  badgeForm.LEIRT,
+                    LIG = badgeForm.LIG,
+                    avaliation = badgeForm.avaliation!!,
+                    category = badgeForm.category!!,
+                    description = badgeForm.description,
+                    toWin = badgeForm.toWin,
+                    validacao = badgeForm.validacao!!)
+            var teacher = teacherRepository.findByName(principal.name)
+            if(teacher==null) {
+                teacher = pt.ulusofona.badges.dao.Teacher(
+                        name = principal.name
+                )
+                teacherRepository.save(teacher)
+            }
+            badgeDao.teacher = teacher
+            badgeRepository.save(badgeDao)
+
+            return "redirect:/teacher/detailBadge/${badgeDao.id}"
+
+        }else{
+            bindingResult.rejectValue("name", "badges.duplicate", "Erro: Já existe um badge com este nome")
+            return "badgeForm"
+
         }
 
-
-
-        badgeDao.teacher = teacher
-        badgeRepository.save(badgeDao)
-
-        return "redirect:/teacher/detailBadge/${badgeDao.id}"
     }
 
 //    @GetMapping("/detailBadge")
@@ -181,6 +186,7 @@ class TeacherController(
 
         return "badgeSend"
     }
+
     @PostMapping("/badgeSend")
     fun processSendForm(@Valid @ModelAttribute("sendBadgeForm")sendForm: SendForm,
                     bindingResult: BindingResult, principal: Principal, model: ModelMap) : String{
@@ -215,23 +221,31 @@ class TeacherController(
             var nomeAluno = a.trim()
 
             var aluno = studentRepository.findByName(nomeAluno)
+
+
             if(aluno == null){
                 aluno = pt.ulusofona.badges.dao.Student( name =  nomeAluno)
                 studentRepository.save(aluno)
             }
+
+            var alunoRepetido = studentBadgeRepository.findByStudentId(aluno.id)
 
             var studentBadge = StudentBadge()
             studentBadge.data = currentDate
             if (badgeGanho != null) {
                 studentBadge.badgeId = badgeGanho.id
             }
-            studentBadge.studentId = aluno.id
-            if (badgeGanho != null) {
-                listaBadges.add(badgeGanho)
+
+            if(alunoRepetido!!.isEmpty()){
+                studentBadge.studentId = aluno.id
+                if (badgeGanho != null) {
+                    listaBadges.add(badgeGanho)
+                }
+
+                listaStudentBadge.add(studentBadge)
+                studentBadgeRepository.save(studentBadge)
             }
 
-            listaStudentBadge.add(studentBadge)
-            studentBadgeRepository.save(studentBadge)
         }
 
         val studentBadges = studentBadgeRepository.findByBadgeId(badgeGanho!!.id)
