@@ -83,7 +83,7 @@
     <h4 style="text-align: center;  margin-top: 25px">Alunos Associados ao Badge</h4>
     <br>
     <div style=" margin: 0 auto;  " class="row col-md-3 table-responsive">
-        <table  id="customerTable" class="table">
+        <table  id="customerTable" class="table table-bordered">
             <thead>
             <tr>
                 <th>Aluno</th>
@@ -99,8 +99,10 @@
 
             </tbody>
         </table>
-        <button onclick="exportToExcel('customerTable')">Exportar para Excel</button>
-
+        <p></p>
+        <button type="button" class="btn btn-info" onclick="exportToExcel('customerTable')" style="margin-left:60px">Exportar para Excel</button>
+        <br>
+        <br>
     </div>
 
 </div>
