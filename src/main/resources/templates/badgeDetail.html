@@ -80,7 +80,7 @@
         </figcaption>
     </figure>
     <br>
-    <h4 style="text-align: center;  margin-top: 25px">Alunos Associados ao Badge</h4>
+    <h3 style="text-align: center;  margin-top: 25px">Alunos Associados ao Badge</h3>
     <br>
     <div style=" margin: 0 auto;  " class="row col-md-3 table-responsive">
         <table  id="customerTable" class="table table-bordered">
@@ -100,7 +100,16 @@
             </tbody>
         </table>
         <p></p>
-        <button type="button" class="btn btn-info" onclick="exportToExcel('customerTable')" style="margin-left:60px">Exportar para Excel</button>
+        <div class="container">
+            <div class="row">
+                <dv class="col align-self-end">
+                    <button type="button" class="btn btn-info" onclick="exportToExcel('customerTable')" >Exportar para Excel</button>
+                </dv>
+            </div>
+        </div>
+
+
+
         <br>
         <br>
     </div>
