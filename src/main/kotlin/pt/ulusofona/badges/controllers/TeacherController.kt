@@ -223,11 +223,11 @@ class TeacherController(
             var aluno = studentRepository.findByName(nomeAluno)
 
 
+
             if(aluno == null){
                 aluno = pt.ulusofona.badges.dao.Student( name =  nomeAluno)
                 studentRepository.save(aluno)
             }
-
             var alunoRepetido = studentBadgeRepository.findByStudentId(aluno.id)
 
             var studentBadge = StudentBadge()
@@ -236,8 +236,9 @@ class TeacherController(
                 studentBadge.badgeId = badgeGanho.id
             }
 
-            if(alunoRepetido!!.isEmpty()){
+            if(studentBadgeRepository.findByStudentId(aluno.id)!!.isEmpty()){
                 studentBadge.studentId = aluno.id
+
                 if (badgeGanho != null) {
                     listaBadges.add(badgeGanho)
                 }

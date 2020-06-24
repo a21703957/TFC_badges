@@ -3,6 +3,39 @@
 <head th:replace="layouts/layout :: head (title = 'Badge Submetido')">
 
 </head>
+<script type="text/javascript">
+    function exportToExcel(tableID, filename = ''){
+        var downloadurl;
+        var dataFileType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename?filename+'.xls':'export_excel_data.xls';
+
+        // Create download link element
+        downloadurl = document.createElement("a");
+
+        document.body.appendChild(downloadurl);
+
+        if(navigator.msSaveOrOpenBlob){
+            var blob = new Blob(['\ufeff', tableHTMLData], {
+                type: dataFileType
+            });
+            navigator.msSaveOrOpenBlob( blob, filename);
+        }else{
+            // Create a link to the file
+            downloadurl.href = 'data:' + dataFileType + ', ' + tableHTMLData;
+
+            // Setting the file name
+            downloadurl.download = filename;
+
+            //triggering the function
+            downloadurl.click();
+        }
+    }
+
+</script>
 
 <style>
     figure{
@@ -32,7 +65,6 @@
         <figcaption >
             <div class="row">
                 <div style="margin-left: 30px">
-                    <div class="row"><p><b>Docente:&nbsp;</b></p><p th:text="${username}"></p></div>
                     <div class="row"><p><b>Nome:&nbsp;</b></p><p th:text="${badge.name}"></p></div>
                     <div class="row"><p><b>Curso:&nbsp;</b> </p><td th:text="${badge.LEIRT}  ?' LEIRT'"/><td th:text="${badge.LEI}  ?' LEI'"/><td th:text="${badge.LIG}  ?' LIG'"/></div>
                     <div class="row"><p><b>Ano Curricular:&nbsp;</b> </p><p th:text="${badge.year}"></p></div>
@@ -54,7 +86,7 @@
         <table  id="customerTable" class="table">
             <thead>
             <tr>
-                <th>Nº Aluno</th>
+                <th>Aluno</th>
                 <th>Data</th>
             </tr>
             <tr th:each="estudante : ${estudantes}">
@@ -67,6 +99,7 @@
 
             </tbody>
         </table>
+        <button onclick="exportToExcel('customerTable')">Exportar para Excel</button>
 
     </div>
 

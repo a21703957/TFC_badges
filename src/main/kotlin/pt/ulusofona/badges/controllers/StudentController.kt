@@ -152,6 +152,7 @@ class StudentController(
 
         model["badge"] = badge
 
+
         return "studentBadgeDetail"
     }
 
