@@ -232,24 +232,21 @@ class TeacherController(
 
             var studentBadge = StudentBadge()
             studentBadge.data = currentDate
+
             if (badgeGanho != null) {
                 studentBadge.badgeId = badgeGanho.id
-
-
 
             }
 
                //
 
+            print(alunoRepetido!!.size)
+            if(alunoRepetido!!.size == 0){
+                studentBadge.studentId = aluno.id
+                listaStudentBadge.add(studentBadge)
+                studentBadgeRepository.save(studentBadge)
 
-                    studentBadge.studentId = aluno.id
-
-                    listaStudentBadge.add(studentBadge)
-                    studentBadgeRepository.save(studentBadge)
-
-
-
-
+            }
 
 
 
