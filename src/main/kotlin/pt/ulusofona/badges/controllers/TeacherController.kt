@@ -234,18 +234,24 @@ class TeacherController(
             studentBadge.data = currentDate
             if (badgeGanho != null) {
                 studentBadge.badgeId = badgeGanho.id
+
+
+
             }
 
-            if(studentBadgeRepository.findByStudentId(aluno.id)!!.isEmpty()){
-                studentBadge.studentId = aluno.id
+               //
 
-                if (badgeGanho != null) {
-                    listaBadges.add(badgeGanho)
-                }
 
-                listaStudentBadge.add(studentBadge)
-                studentBadgeRepository.save(studentBadge)
-            }
+                    studentBadge.studentId = aluno.id
+
+                    listaStudentBadge.add(studentBadge)
+                    studentBadgeRepository.save(studentBadge)
+
+
+
+
+
+
 
         }
 
