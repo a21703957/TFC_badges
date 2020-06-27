@@ -63,10 +63,56 @@ class TeacherController(
     @GetMapping(value = ["/detailBadge/{badgeId}"])
     fun detailPage(@PathVariable badgeId: Long, model:ModelMap, request: HttpServletRequest, principal:Principal): String{
 
-        val badge = badgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        val badge = badgeRepository.findByIdOrNull(badgeId) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND) as Throwable
 
+        var studentBadges = studentBadgeRepository.findByBadgeId(badgeId)
+        /////////
+
+     /*   var ba = studentBadgeRepository.findByBadgeId(badge.id)
+        var count = ba!!.size
+        if(ba!!.size>1){
+            for (fff in ba){
+                studentBadgeRepository.deleteByStudentId(fff.studentId)
+                count-=1
+                if(count == 1){
+                    break
+                }
+            }
+
+        }*/
+
+   /*     var count = 0
+        if (studentBadges != null) {
+            for(z in studentBadges){
+                var zz = studentBadgeRepository.findByStudentId(z.studentId)
+                print("SIZE: " + zz!!.size  + " NOME: " + z.studentId)
+                count = zz.size
+                if(zz.size>1){
+
+                    for(tt in zz.asReversed()){
+                       // count = zz.size
+                        if(count>1){
+                            studentBadgeRepository.deleteById(tt.id)
+                            count= count -1
+
+                        }else{
+                            break
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+
+
+*/
+
+        //////////
         model["badge"] = badge
         print("ESTE" + badge)
+       // var estudantesRepetidos = studentBadgeRepository.findByStudentId()
         val estudantes = studentBadgeRepository.findByBadgeId(badge.id)?.map {
             val student = studentRepository.getOne(it.studentId)
             student.dateOfBadge = it.data
@@ -74,11 +120,14 @@ class TeacherController(
         }
 
         var estudanteMapa = HashSet<Student>()
+
         if (estudantes != null) {
             for (estudante in estudantes!!){
                 estudanteMapa.add(estudante)
             }
         }
+
+        print("DISPONIVEL: " + estudanteMapa.size)
 
         model["estudantes"] = estudanteMapa
         print("tamanho" + estudantes!!.size)
@@ -213,7 +262,7 @@ class TeacherController(
         }
 
 
-        for(a in h){
+        for(a in h) {
             /*var aluno = pt.ulusofona.badges.dao.Student(
                     name = a
             )*/
@@ -224,11 +273,11 @@ class TeacherController(
 
 
 
-            if(aluno == null){
-                aluno = pt.ulusofona.badges.dao.Student( name =  nomeAluno)
+            if (aluno == null) {
+                aluno = pt.ulusofona.badges.dao.Student(name = nomeAluno)
                 studentRepository.save(aluno)
             }
-            var alunoRepetido = studentBadgeRepository.findByStudentId(aluno.id)
+
 
             var studentBadge = StudentBadge()
             studentBadge.data = currentDate
@@ -238,16 +287,14 @@ class TeacherController(
 
             }
 
-               //
+            //
+            var badgeStudent = studentBadgeRepository.findByStudentIdAndBadgeId(aluno.id, badgeGanho!!.id)
 
-            print(alunoRepetido!!.size)
-            if(alunoRepetido!!.size == 0){
+            if(badgeStudent == null  || badgeStudent!!.isEmpty()){
                 studentBadge.studentId = aluno.id
                 listaStudentBadge.add(studentBadge)
                 studentBadgeRepository.save(studentBadge)
-
             }
-
 
 
         }
@@ -256,6 +303,7 @@ class TeacherController(
         val badges = studentBadges?.map {
             badgeRepository.getOne(it.badgeId)
         }?.distinct()
+
 
         model["tabela_studentbadge"] = badges
 

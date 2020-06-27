@@ -51,6 +51,7 @@ class StudentController(
 
 
 
+
         var myBadges = studentBadgeRepository.findByStudentId(student.id)?.map {
             badgeRepository.getOne(it.badgeId)
         }
